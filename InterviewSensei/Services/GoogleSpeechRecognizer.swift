@@ -12,19 +12,6 @@ class GoogleSpeechRecognizer: ObservableObject {
     private let apiKey = "AIzaSyDDA8ScbcNxepNqK3Y63-0TJ0EmoLZPVBQ"
     private let baseURL = "https://speech.googleapis.com/v1/speech:recognize"
     
-    private var silenceTimer: Timer?
-    private var initialGraceTimer: Timer?
-    private var lastAudioLevel: Float = -160.0 // Start with silence level
-    
-    private let silenceDuration: TimeInterval = 4.0
-    private let initialSilenceGracePeriod: TimeInterval = 5.0
-    private let volumeThreshold: Float = -50.0 // Adjusted threshold for better silence detection
-    private let silenceThreshold: Float = -60.0 // New threshold for silence detection
-    
-    private var isInInitialGracePeriod = true
-    private var consecutiveSilenceFrames = 0
-    private let requiredSilenceFrames = 10 // Number of consecutive silent frames to trigger silence
-    
     func startRecording() {
         guard !isRecording else { return }
         stopRecording()
@@ -43,8 +30,6 @@ class GoogleSpeechRecognizer: ObservableObject {
         let bufferSize: AVAudioFrameCount = 1024
         
         audioData = Data()
-        consecutiveSilenceFrames = 0
-        lastAudioLevel = -160.0
         
         inputNode.installTap(onBus: 0, bufferSize: bufferSize, format: recordingFormat) { [weak self] buffer, _ in
             guard let self = self else { return }
@@ -55,8 +40,6 @@ class GoogleSpeechRecognizer: ObservableObject {
             // Convert audio buffer to Data
             let audioBuffer = Data(bytes: channelDataArray, count: channelDataArray.count * MemoryLayout<Float>.size)
             self.audioData?.append(audioBuffer)
-            
-            self.detectAudioVolume(buffer: buffer)
         }
         
         audioEngine.prepare()
@@ -64,8 +47,6 @@ class GoogleSpeechRecognizer: ObservableObject {
         do {
             try audioEngine.start()
             isRecording = true
-            isInInitialGracePeriod = true
-            startInitialGraceTimer()
         } catch {
             self.error = error
             stopRecording()
@@ -76,9 +57,6 @@ class GoogleSpeechRecognizer: ObservableObject {
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
         isRecording = false
-        
-        initialGraceTimer?.invalidate()
-        silenceTimer?.invalidate()
         
         if let audioData = audioData {
             transcribeAudio(audioData: audioData)
@@ -95,11 +73,12 @@ class GoogleSpeechRecognizer: ObservableObject {
                     "sampleRateHertz": 16000,
                     "languageCode": "en-US",
                     "enableAutomaticPunctuation": true,
-                    "diarizationConfig": [ // Ensure this nesting exists
-                        "enableSpeakerDiarization": true,
-                        "minSpeakerCount": 2, // Make sure you're using min/maxSpeakerCount
-                        "maxSpeakerCount": 2
-                    ]
+                    "enableWordTimeOffsets": true,
+                    "audioChannelCount": 1,
+                    "enableSpeakerDiarization" : true,
+                    "minSpeakerCount" : 2,
+                    "maxSpeakerCount" : 2,
+                    "enableSeparateRecognitionPerChannel" : true
                 ],
             "audio": [
                 "content": base64Audio
@@ -194,50 +173,5 @@ class GoogleSpeechRecognizer: ObservableObject {
                 }
             }
         }.resume()
-    }
-    
-    private func startInitialGraceTimer() {
-        initialGraceTimer?.invalidate()
-        initialGraceTimer = Timer.scheduledTimer(withTimeInterval: initialSilenceGracePeriod, repeats: false) { [weak self] _ in
-            self?.isInInitialGracePeriod = false
-            self?.startSilenceTimer()
-        }
-    }
-    
-    private func startSilenceTimer() {
-        silenceTimer?.invalidate()
-        silenceTimer = Timer.scheduledTimer(withTimeInterval: silenceDuration, repeats: false) { [weak self] _ in
-            self?.stopRecording()
-        }
-    }
-    
-    private func resetSilenceTimer() {
-        guard !isInInitialGracePeriod else { return }
-        consecutiveSilenceFrames = 0
-        startSilenceTimer()
-    }
-    
-    private func detectAudioVolume(buffer: AVAudioPCMBuffer) {
-        guard let channelData = buffer.floatChannelData?.pointee else { return }
-        
-        let channelDataArray = Array(UnsafeBufferPointer(start: channelData, count: Int(buffer.frameLength)))
-        let rms = sqrt(channelDataArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
-        
-        let decibels = 20 * log10(rms)
-        lastAudioLevel = decibels
-        
-        // Check for silence
-        if decibels < silenceThreshold {
-            consecutiveSilenceFrames += 1
-            if consecutiveSilenceFrames >= requiredSilenceFrames {
-                print("Silence detected. Stopping recording.")
-                stopRecording()
-            }
-        } else {
-            consecutiveSilenceFrames = 0
-            if decibels > volumeThreshold {
-                resetSilenceTimer()
-            }
-        }
     }
 } 
