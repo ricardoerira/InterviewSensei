@@ -1,84 +1,34 @@
 import SwiftUI
-import Charts
 
 struct LibraryView: View {
     @StateObject private var viewModel = LibraryViewModel()
     @State private var selectedTimeFrame: TimeFrame = .week
-    @State private var showingResponseDetail = false
-    @State private var selectedResponse: Response?
     
     var body: some View {
         NavigationView {
-            List {
-                // Analytics Section
-                Section(header: Text("Analytics")) {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Picker("Time Frame", selection: $selectedTimeFrame) {
-                            ForEach(TimeFrame.allCases, id: \.self) { timeFrame in
-                                Text(timeFrame.rawValue).tag(timeFrame)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        
-                        Chart(viewModel.analytics) { data in
-                            LineMark(
-                                x: .value("Date", data.date),
-                                y: .value("Score", data.score)
-                            )
-                            .foregroundStyle(.blue)
-                            
-                            AreaMark(
-                                x: .value("Date", data.date),
-                                y: .value("Score", data.score)
-                            )
-                            .foregroundStyle(.blue.opacity(0.1))
-                        }
-                        .frame(height: 200)
-                        
-                        HStack {
-                            StatisticView(
-                                title: "Total Sessions",
-                                value: "\(viewModel.totalSessions)"
-                            )
-                            
-                            StatisticView(
-                                title: "Avg. Score",
-                                value: String(format: "%.1f", viewModel.averageScore)
-                            )
-                            
-                            StatisticView(
-                                title: "Questions",
-                                value: "\(viewModel.totalQuestions)"
-                            )
-                        }
+            ScrollView {
+                VStack(spacing: 20) {
+                    // Statistics Section
+                    HStack {
+                        StatisticView(title: "Total Sessions", value: "\(viewModel.totalSessions)")
+                        StatisticView(title: "Total Questions", value: "\(viewModel.totalQuestions)")
                     }
-                    .padding(.vertical)
-                }
-                
-                // Recent Responses Section
-                Section(header: Text("Recent Responses")) {
-                    ForEach(viewModel.recentResponses) { response in
-                        ResponseRow(response: response)
-                            .onTapGesture {
-                                selectedResponse = response
-                                showingResponseDetail = true
-                            }
-                    }
-                }
-                
-                // Saved Questions Section
-                Section(header: Text("Saved Questions")) {
-                    ForEach(viewModel.savedQuestions) { question in
-                        QuestionRow(question: question)
+                    .padding()
+                    
+                    // Recent Responses
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Recent Responses")
+                            .font(.headline)
+                            .padding(.horizontal)
+                        
+                        ForEach(viewModel.recentResponses) { response in
+                            ResponseRow(response: response)
+                                .padding(.horizontal)
+                        }
                     }
                 }
             }
             .navigationTitle("Library")
-            .sheet(isPresented: $showingResponseDetail) {
-                if let response = selectedResponse {
-                    ResponseDetailView(response: response)
-                }
-            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
@@ -125,10 +75,6 @@ struct ResponseRow: View {
             
             HStack {
                 Label(formatDuration(response.duration), systemImage: "clock")
-                Spacer()
-                Label(String(format: "%.0f%%", response.averageFeedbackScore * 100),
-                      systemImage: "star.fill")
-                    .foregroundColor(.yellow)
             }
             .font(.caption)
             .foregroundColor(.secondary)
@@ -170,30 +116,6 @@ struct ResponseDetailView: View {
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(10)
                     }
-                    
-                    // Metrics
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Metrics")
-                            .font(.headline)
-                        
-                        MetricRow(title: "Duration", value: formatDuration(response.duration))
-                        MetricRow(title: "Filler Words", value: "\(response.fillerWordCount)")
-                        MetricRow(title: "Speaking Pace", value: String(format: "%.1f wpm", response.speakingPace))
-                        MetricRow(title: "Clarity", value: String(format: "%.0f%%", response.clarityScore * 100))
-                        MetricRow(title: "Confidence", value: String(format: "%.0f%%", response.confidenceScore * 100))
-                    }
-                    
-                    // Feedback
-                    if let feedback = response.feedback as? Set<Feedback>, !feedback.isEmpty {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Feedback")
-                                .font(.headline)
-                            
-                            ForEach(Array(feedback), id: \.id) { feedback in
-                                FeedbackRow(feedback: feedback)
-                            }
-                        }
-                    }
                 }
                 .padding()
             }
@@ -208,52 +130,6 @@ struct ResponseDetailView: View {
             }
         }
     }
-    
-    private func formatDuration(_ duration: Double) -> String {
-        let minutes = Int(duration) / 60
-        let seconds = Int(duration) % 60
-        return String(format: "%d:%02d", minutes, seconds)
-    }
-}
-
-struct MetricRow: View {
-    let title: String
-    let value: String
-    
-    var body: some View {
-        HStack {
-            Text(title)
-                .foregroundColor(.secondary)
-            Spacer()
-            Text(value)
-                .bold()
-        }
-        .padding(.vertical, 4)
-    }
-}
-
-struct FeedbackRow: View {
-    let feedback: Feedback
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                Text(feedback.category ?? "")
-                    .font(.subheadline)
-                Spacer()
-                Text("\(Int(feedback.score * 100))%")
-                    .font(.subheadline)
-                    .foregroundColor(feedback.isPositive ? .green : feedback.isNeutral ? .yellow : .red)
-            }
-            
-            Text(feedback.text ?? "")
-                .font(.caption)
-                .foregroundColor(.secondary)
-        }
-        .padding()
-        .background(Color.gray.opacity(0.1))
-        .cornerRadius(10)
-    }
 }
 
 enum TimeFrame: String, CaseIterable {
@@ -262,19 +138,11 @@ enum TimeFrame: String, CaseIterable {
     case year = "Year"
 }
 
-struct AnalyticsData: Identifiable {
-    let id = UUID()
-    let date: Date
-    let score: Double
-}
-
 class LibraryViewModel: ObservableObject {
-    @Published var analytics: [AnalyticsData] = []
     @Published var recentResponses: [Response] = []
     @Published var savedQuestions: [Question] = []
     
     var totalSessions: Int { 0 } // TODO: Implement
-    var averageScore: Double { 0.0 } // TODO: Implement
     var totalQuestions: Int { 0 } // TODO: Implement
     
     func exportData() {

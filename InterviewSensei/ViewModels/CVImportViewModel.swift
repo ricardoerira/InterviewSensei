@@ -31,7 +31,8 @@ class CVImportViewModel: ObservableObject {
     @Published var showError = false
     @Published var showSuccess = false
     @Published var importedCV: CVInfo?
-    
+    @Published var isProcessing = false
+
     private let cvProcessingService: CVProcessingService
     private let geminiService: GeminiService
     
@@ -128,6 +129,32 @@ class CVImportViewModel: ObservableObject {
                 self.errorMessage = "Failed to delete CV: \(error.localizedDescription)"
                 self.showError = true
             }
+        }
+    }
+    
+    func importCV() {
+        // ...existing import logic...
+    }
+
+    func handleCVProcessingError(_ error: Error) {
+        self.errorMessage = error.localizedDescription
+        // Try to fetch the latest saved CV from Core Data if available
+        let context = PersistenceController.shared.container.viewContext
+        let fetchRequest = NSFetchRequest<CVInfo>(entityName: "CVInfo")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "updatedAt", ascending: false)]
+        fetchRequest.fetchLimit = 1
+
+        do {
+            if let savedCV = try context.fetch(fetchRequest).first {
+                self.importedCV = savedCV
+                print("[CVImportViewModel] Loaded saved CV after error: \(savedCV.summary ?? "")")
+            } else {
+                self.importedCV = nil
+                print("[CVImportViewModel] No saved CV found after error.")
+            }
+        } catch {
+            self.importedCV = nil
+            print("[CVImportViewModel] Failed to fetch saved CV after error: \(error.localizedDescription)")
         }
     }
 }

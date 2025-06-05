@@ -9,17 +9,16 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
+    let persistenceController = PersistenceController.shared
+    
     var body: some View {
         MainTabView()
-            .environment(\.managedObjectContext, viewContext)
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
