@@ -190,8 +190,8 @@
             filePath = "InterviewSensei/Views/InterviewView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -285,8 +285,8 @@
             filePath = "InterviewSensei/Views/InterviewView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -301,8 +301,8 @@
             filePath = "InterviewSensei/Views/InterviewView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -342,134 +342,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1483A3DA-7269-4A34-8F1D-0A9E1A6A740D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "transcribeAudio(audioData:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1483A3DA-7269-4A34-8F1D-0A9E1A6A740D - d30e45f8b3d46263"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in InterviewSensei.GoogleSpeechRecognizer.startStreamingRecognition() -&gt; ()"
-                  moduleName = "InterviewSensei"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andres/Documents/Interview/InterviewSensei/InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "154"
-                  endingLineNumber = "154"
-                  offsetFromSymbolStart = "2531">
-               </Location>
-               <Location
-                  uuid = "1483A3DA-7269-4A34-8F1D-0A9E1A6A740D - d30e45f8b3d46263"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in InterviewSensei.GoogleSpeechRecognizer.startStreamingRecognition() -&gt; ()"
-                  moduleName = "InterviewSensei"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andres/Documents/Interview/InterviewSensei/InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "154"
-                  endingLineNumber = "154"
-                  offsetFromSymbolStart = "2614">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "00F20A7E-D1E0-46CF-9F2F-86F9B5180626"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "transcribeAudio(audioData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "72327C64-2222-40E7-AD61-B24BFA3DE514"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "transcribeAudio(audioData:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "72327C64-2222-40E7-AD61-B24BFA3DE514 - a6f40ce6cff49553"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "InterviewSensei.GoogleSpeechRecognizer.startStreamingRecognition() -&gt; ()"
-                  moduleName = "InterviewSensei"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andres/Documents/Interview/InterviewSensei/InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "137"
-                  endingLineNumber = "137"
-                  offsetFromSymbolStart = "3148">
-               </Location>
-               <Location
-                  uuid = "72327C64-2222-40E7-AD61-B24BFA3DE514 - d30e45f8b3d47cb4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in InterviewSensei.GoogleSpeechRecognizer.startStreamingRecognition() -&gt; ()"
-                  moduleName = "InterviewSensei"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andres/Documents/Interview/InterviewSensei/InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "137"
-                  endingLineNumber = "137"
-                  offsetFromSymbolStart = "364">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8E1CFE91-E1E6-482D-A04F-06D0C082CE53"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "transcribeAudio(audioData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B3D17159-EA7E-4273-8F49-F8BAC45EBDA7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -477,8 +349,8 @@
             filePath = "InterviewSensei/Views/InterviewView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -493,8 +365,8 @@
             filePath = "InterviewSensei/Views/InterviewView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -509,24 +381,10 @@
             filePath = "InterviewSensei/Views/InterviewView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "body"
             landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0D54788E-1804-43E2-9633-E5B732201B77"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -548,15 +406,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9EF3B938-346A-4C94-8537-3003683E86B9"
+            uuid = "CAE049B2-0F0F-4298-9F72-4296051E2BF7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "startRecording()"
             landmarkType = "7">
          </BreakpointContent>
@@ -564,15 +422,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F3305A83-851A-4858-A593-F47AE89FE4A9"
-            shouldBeEnabled = "No"
+            uuid = "5F963FF4-8555-46C8-ADFA-3265350350B8"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "startRecording()"
             landmarkType = "7">
          </BreakpointContent>
@@ -580,47 +438,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "45E96500-3816-4F65-B3D8-50FF7DDCBE7F"
-            shouldBeEnabled = "Yes"
+            uuid = "F4482A54-1244-40EC-A018-879F4E9DFD0D"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "transcribeAudio(audioData:)"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "startRecording()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "45E96500-3816-4F65-B3D8-50FF7DDCBE7F - d30e45f8b3d462c6"
+                  uuid = "F4482A54-1244-40EC-A018-879F4E9DFD0D - cfcd06898bcfcc4c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in InterviewSensei.GoogleSpeechRecognizer.startStreamingRecognition() -&gt; ()"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in InterviewSensei.WhisperSpeechRecognizer.transcribeAudio(audioData: Foundation.Data) -&gt; ()"
                   moduleName = "InterviewSensei"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/andres/Documents/Interview/InterviewSensei/InterviewSensei/Services/GoogleSpeechRecognizer.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "1688">
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "888">
                </Location>
                <Location
-                  uuid = "45E96500-3816-4F65-B3D8-50FF7DDCBE7F - d30e45f8b3d462c6"
+                  uuid = "F4482A54-1244-40EC-A018-879F4E9DFD0D - cfcd06898bcfcc4c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in InterviewSensei.GoogleSpeechRecognizer.startStreamingRecognition() -&gt; ()"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in InterviewSensei.WhisperSpeechRecognizer.transcribeAudio(audioData: Foundation.Data) -&gt; ()"
                   moduleName = "InterviewSensei"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/andres/Documents/Interview/InterviewSensei/InterviewSensei/Services/GoogleSpeechRecognizer.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "1987">
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "1396">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -628,81 +486,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "582C14DA-057D-4421-8E5A-5A499D30F4CA"
-            shouldBeEnabled = "Yes"
+            uuid = "B5174887-0C53-4B13-ADF2-FCF691216686"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "transcribeAudio(audioData:)"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "startRecording()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2B3A8F0C-2B6F-4165-9424-E6B7481A4BE2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "transcribeAudio(audioData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FF10CAFB-347A-48D2-8A94-F9B2C5392F62"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "transcribeAudio(audioData:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "FF10CAFB-347A-48D2-8A94-F9B2C5392F62 - d30e45f8b3d462e7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in InterviewSensei.GoogleSpeechRecognizer.startStreamingRecognition() -&gt; ()"
-                  moduleName = "InterviewSensei"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andres/Documents/Interview/InterviewSensei/InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "150"
-                  endingLineNumber = "150"
-                  offsetFromSymbolStart = "1155">
-               </Location>
-               <Location
-                  uuid = "FF10CAFB-347A-48D2-8A94-F9B2C5392F62 - d30e45f8b3d462e7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in InterviewSensei.GoogleSpeechRecognizer.startStreamingRecognition() -&gt; ()"
-                  moduleName = "InterviewSensei"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andres/Documents/Interview/InterviewSensei/InterviewSensei/Services/GoogleSpeechRecognizer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "150"
-                  endingLineNumber = "150"
-                  offsetFromSymbolStart = "1645">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
