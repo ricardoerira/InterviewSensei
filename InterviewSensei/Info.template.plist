@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OpenAIKey</key>
+	<string>YOUR_OPENAI_API_KEY</string>
+	<key>googleSpeechApiKey</key>
+	<string>YOUR_GOOGLE_SPEECH_API_KEY</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Interview Ace needs access to your microphone to listen to interview questions.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Interview Ace needs speech recognition to transcribe interview questions.</string>
+	<key>GeminiAPIKey</key>
+	<string>YOUR_GEMINI_API_KEY</string>
+</dict>
+</plist> 
