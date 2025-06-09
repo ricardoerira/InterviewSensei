@@ -66,4 +66,20 @@
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="cvInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CVInfo" inverseName="experience" inverseEntity="CVInfo"/>
     </entity>
+    <entity name="QuizResult" representedClassName="QuizResult" syncable="YES" codeGenerationType="class">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalQuestions" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="questions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="QuizQuestionResult" inverseName="quizResult" inverseEntity="QuizQuestionResult"/>
+    </entity>
+    <entity name="QuizQuestionResult" representedClassName="QuizQuestionResult" syncable="YES" codeGenerationType="class">
+        <attribute name="correctOptionIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="options" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="questionText" optional="YES" attributeType="String"/>
+        <attribute name="selectedOptionIndex" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <relationship name="quizResult" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuizResult" inverseName="questions" inverseEntity="QuizResult"/>
+    </entity>
 </model>

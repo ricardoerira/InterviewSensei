@@ -12,7 +12,6 @@
 		41274D692DD63A6400064172 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41274D682DD63A6400064172 /* Assets.xcassets */; };
 		41274D6C2DD63A6400064172 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41274D6B2DD63A6400064172 /* Preview Assets.xcassets */; };
 		41274D6E2DD63A6400064172 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41274D6D2DD63A6400064172 /* Persistence.swift */; };
-		41274D712DD63A6400064172 /* InterviewSensei.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41274D6F2DD63A6400064172 /* InterviewSensei.xcdatamodeld */; };
 		41274D7B2DD63A6500064172 /* InterviewSenseiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41274D7A2DD63A6500064172 /* InterviewSenseiTests.swift */; };
 		41274D852DD63A6500064172 /* InterviewSenseiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41274D842DD63A6500064172 /* InterviewSenseiUITests.swift */; };
 		41274D872DD63A6500064172 /* InterviewSenseiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41274D862DD63A6500064172 /* InterviewSenseiUITestsLaunchTests.swift */; };
@@ -22,8 +21,6 @@
 		4167A0C62DD63FCF0008D0DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4167A0B02DD63FCA0008D0DA /* Preview Assets.xcassets */; };
 		4167A0C82DD63FCF0008D0DA /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4167A0B42DD63FCB0008D0DA /* MainTabView.swift */; };
 		4167A0C92DD63FCF0008D0DA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4167A0B52DD63FCB0008D0DA /* ProfileView.swift */; };
-		4167A0CA2DD63FCF0008D0DA /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4167A0B62DD63FCB0008D0DA /* PracticeView.swift */; };
-		4167A0CC2DD63FCF0008D0DA /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4167A0B82DD63FCB0008D0DA /* LibraryView.swift */; };
 		4167A0D02DD63FCF0008D0DA /* InterviewSensei.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4167A0BD2DD63FCD0008D0DA /* InterviewSensei.xcdatamodeld */; };
 		4167A0D62DD63FD00008D0DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4167A0C52DD63FCE0008D0DA /* Assets.xcassets */; };
 		4167A0D82DD648220008D0DA /* GeminiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4167A0D72DD648220008D0DA /* GeminiService.swift */; };
@@ -33,6 +30,12 @@
 		41795B2A2DF214180012B052 /* InterviewAceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41795B292DF214180012B052 /* InterviewAceView.swift */; };
 		41795B2C2DF214B20012B052 /* InterviewAceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41795B2B2DF214B10012B052 /* InterviewAceViewModel.swift */; };
 		41795B2F2DF2381B0012B052 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41795B2E2DF2381B0012B052 /* GoogleService-Info.plist */; };
+		41795B362DF24CA80012B052 /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41795B352DF24CA80012B052 /* PracticeView.swift */; };
+		41795B382DF24CAF0012B052 /* PracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41795B372DF24CAF0012B052 /* PracticeViewModel.swift */; };
+		41795B3A2DF24CCC0012B052 /* QuizModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41795B392DF24CCC0012B052 /* QuizModels.swift */; };
+		41795B3C2DF251480012B052 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41795B3B2DF251480012B052 /* QuizResultView.swift */; };
+		41831DA82DF483DC00B3A18C /* QuizStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41831DA72DF483DC00B3A18C /* QuizStatisticsView.swift */; };
+		41831DAA2DF4869E00B3A18C /* QuizStatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41831DA92DF4869E00B3A18C /* QuizStatisticsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +62,6 @@
 		41274D682DD63A6400064172 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41274D6B2DD63A6400064172 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		41274D6D2DD63A6400064172 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		41274D702DD63A6400064172 /* InterviewSensei.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InterviewSensei.xcdatamodel; sourceTree = "<group>"; };
 		41274D762DD63A6500064172 /* InterviewSenseiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InterviewSenseiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41274D7A2DD63A6500064172 /* InterviewSenseiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewSenseiTests.swift; sourceTree = "<group>"; };
 		41274D802DD63A6500064172 /* InterviewSenseiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InterviewSenseiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,8 +73,6 @@
 		4167A0B02DD63FCA0008D0DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4167A0B42DD63FCB0008D0DA /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4167A0B52DD63FCB0008D0DA /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		4167A0B62DD63FCB0008D0DA /* PracticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
-		4167A0B82DD63FCB0008D0DA /* LibraryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		4167A0BE2DD63FCD0008D0DA /* InterviewSensei.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InterviewSensei.xcdatamodel; sourceTree = "<group>"; };
 		4167A0C52DD63FCE0008D0DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4167A0D72DD648220008D0DA /* GeminiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeminiService.swift; sourceTree = "<group>"; };
@@ -83,6 +83,12 @@
 		41795B292DF214180012B052 /* InterviewAceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterviewAceView.swift; sourceTree = "<group>"; };
 		41795B2B2DF214B10012B052 /* InterviewAceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterviewAceViewModel.swift; sourceTree = "<group>"; };
 		41795B2E2DF2381B0012B052 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		41795B352DF24CA80012B052 /* PracticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
+		41795B372DF24CAF0012B052 /* PracticeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewModel.swift; sourceTree = "<group>"; };
+		41795B392DF24CCC0012B052 /* QuizModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizModels.swift; sourceTree = "<group>"; };
+		41795B3B2DF251480012B052 /* QuizResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
+		41831DA72DF483DC00B3A18C /* QuizStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizStatisticsView.swift; sourceTree = "<group>"; };
+		41831DA92DF4869E00B3A18C /* QuizStatisticsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizStatisticsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +152,6 @@
 				41274D662DD63A6000064172 /* ContentView.swift */,
 				41274D682DD63A6400064172 /* Assets.xcassets */,
 				41274D6D2DD63A6400064172 /* Persistence.swift */,
-				41274D6F2DD63A6400064172 /* InterviewSensei.xcdatamodeld */,
 				41274D6A2DD63A6400064172 /* Preview Content */,
 			);
 			path = InterviewSensei;
@@ -198,12 +203,13 @@
 		4167A0B32DD63FCB0008D0DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				41831DA72DF483DC00B3A18C /* QuizStatisticsView.swift */,
+				41795B3B2DF251480012B052 /* QuizResultView.swift */,
+				41795B352DF24CA80012B052 /* PracticeView.swift */,
 				41795B292DF214180012B052 /* InterviewAceView.swift */,
 				41508C352DEA44AE00CF5AD1 /* CVImportView.swift */,
 				4167A0B42DD63FCB0008D0DA /* MainTabView.swift */,
 				4167A0B52DD63FCB0008D0DA /* ProfileView.swift */,
-				4167A0B62DD63FCB0008D0DA /* PracticeView.swift */,
-				4167A0B82DD63FCB0008D0DA /* LibraryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,6 +217,8 @@
 		4167A0BB2DD63FCC0008D0DA /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				41831DA92DF4869E00B3A18C /* QuizStatisticsViewModel.swift */,
+				41795B372DF24CAF0012B052 /* PracticeViewModel.swift */,
 				41795B2B2DF214B10012B052 /* InterviewAceViewModel.swift */,
 				41508C372DEA453A00CF5AD1 /* CVImportViewModel.swift */,
 			);
@@ -220,6 +228,7 @@
 		4167A0BF2DD63FCE0008D0DA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				41795B392DF24CCC0012B052 /* QuizModels.swift */,
 				41795B272DF2117E0012B052 /* InterviewTypes.swift */,
 				4167A0DA2DD64DF90008D0DA /* InterviewSettings.swift */,
 			);
@@ -363,21 +372,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41795B3A2DF24CCC0012B052 /* QuizModels.swift in Sources */,
 				41795B2C2DF214B20012B052 /* InterviewAceViewModel.swift in Sources */,
 				41508C3A2DEA456000CF5AD1 /* CVProcessingService.swift in Sources */,
 				41795B282DF2117E0012B052 /* InterviewTypes.swift in Sources */,
 				4167A0DB2DD64DF90008D0DA /* InterviewSettings.swift in Sources */,
 				4167A0D02DD63FCF0008D0DA /* InterviewSensei.xcdatamodeld in Sources */,
+				41831DAA2DF4869E00B3A18C /* QuizStatisticsViewModel.swift in Sources */,
+				41831DA82DF483DC00B3A18C /* QuizStatisticsView.swift in Sources */,
 				41508C382DEA453A00CF5AD1 /* CVImportViewModel.swift in Sources */,
-				41274D712DD63A6400064172 /* InterviewSensei.xcdatamodeld in Sources */,
+				41795B382DF24CAF0012B052 /* PracticeViewModel.swift in Sources */,
+				41795B3C2DF251480012B052 /* QuizResultView.swift in Sources */,
+				41795B362DF24CA80012B052 /* PracticeView.swift in Sources */,
 				41274D6E2DD63A6400064172 /* Persistence.swift in Sources */,
-				4167A0CA2DD63FCF0008D0DA /* PracticeView.swift in Sources */,
 				41274D672DD63A6000064172 /* ContentView.swift in Sources */,
 				41274D652DD63A6000064172 /* InterviewSenseiApp.swift in Sources */,
 				4167A0C92DD63FCF0008D0DA /* ProfileView.swift in Sources */,
 				41508C362DEA44AF00CF5AD1 /* CVImportView.swift in Sources */,
 				4167A0DD2DD698710008D0DA /* QuestionDetector.swift in Sources */,
-				4167A0CC2DD63FCF0008D0DA /* LibraryView.swift in Sources */,
 				4167A0D82DD648220008D0DA /* GeminiService.swift in Sources */,
 				41795B2A2DF214180012B052 /* InterviewAceView.swift in Sources */,
 				4167A0C82DD63FCF0008D0DA /* MainTabView.swift in Sources */,
@@ -713,16 +725,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		41274D6F2DD63A6400064172 /* InterviewSensei.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				41274D702DD63A6400064172 /* InterviewSensei.xcdatamodel */,
-			);
-			currentVersion = 41274D702DD63A6400064172 /* InterviewSensei.xcdatamodel */;
-			path = InterviewSensei.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		4167A0BD2DD63FCD0008D0DA /* InterviewSensei.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

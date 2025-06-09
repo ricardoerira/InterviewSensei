@@ -43,6 +43,31 @@ class CVImportViewModel: ObservableObject {
             geminiService: geminiService,
             context: context
         )
+        // Load saved CV on initialization
+        loadSavedCV()
+    }
+    
+    func loadSavedCV() {
+        let context = PersistenceController.shared.container.viewContext
+        let fetchRequest = NSFetchRequest<CVInfo>(entityName: "CVInfo")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "updatedAt", ascending: false)]
+        fetchRequest.fetchLimit = 1
+        
+        do {
+            if let savedCV = try context.fetch(fetchRequest).first {
+                self.importedCV = savedCV
+                self.cvInfo = savedCV
+                print("[CVImportViewModel] Loaded saved CV: \(savedCV.name)")
+            } else {
+                self.importedCV = nil
+                self.cvInfo = nil
+                print("[CVImportViewModel] No saved CV found")
+            }
+        } catch {
+            self.importedCV = nil
+            self.cvInfo = nil
+            print("[CVImportViewModel] Failed to fetch saved CV: \(error.localizedDescription)")
+        }
     }
     
     func processCVFile(_ file: URL) async throws -> CVInfo {

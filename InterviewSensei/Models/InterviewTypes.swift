@@ -1,12 +1,5 @@
 import Foundation
 
-enum QuestionCategory: String, CaseIterable {
-    case behavioral = "Behavioral"
-    case technical = "Technical"
-    case problemSolving = "Problem Solving"
-    case leadership = "Leadership"
-    case communication = "Communication"
-}
 
 enum InterviewMode: String, CaseIterable {
     case mock = "Mock Interview"

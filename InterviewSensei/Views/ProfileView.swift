@@ -27,13 +27,7 @@ struct ProfileView: View {
                     .padding(.vertical, 8)
                 }
                 
-                // Statistics Section
-                Section(header: Text("Statistics")) {
-                    StatisticRow(title: "Total Sessions", value: "\(viewModel.totalSessions)")
-                    StatisticRow(title: "Average Score", value: String(format: "%.1f%%", viewModel.averageScore * 100))
-                    StatisticRow(title: "Most Practiced Role", value: viewModel.mostPracticedRole ?? "None")
-                    StatisticRow(title: "Total Questions", value: "\(viewModel.totalQuestions)")
-                }
+               
                 
                 // Preferences Section
                 Section(header: Text("Preferences")) {
@@ -98,20 +92,6 @@ struct ProfileView: View {
             } message: {
                 Text("Are you sure you want to delete your account? This action cannot be undone.")
             }
-        }
-    }
-}
-
-struct StatisticRow: View {
-    let title: String
-    let value: String
-    
-    var body: some View {
-        HStack {
-            Text(title)
-            Spacer()
-            Text(value)
-                .foregroundColor(.secondary)
         }
     }
 }

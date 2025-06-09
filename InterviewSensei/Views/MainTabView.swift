@@ -11,13 +11,17 @@ struct MainTabView: View {
                 .tabItem {
                     Label("CV Import", systemImage: "doc.text.fill")
                 }
-            LibraryView()
+            PracticeView()
                 .tabItem {
-                    Label("Library", systemImage: "books.vertical.fill")
+                    Label("Practice", systemImage: "questionmark.circle.fill")
                 }
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle")
+                }
+            QuizStatisticsView()
+                .tabItem {
+                    Label("Statistics", systemImage: "chart.bar")
                 }
         }
     }

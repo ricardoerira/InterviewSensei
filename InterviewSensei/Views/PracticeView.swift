@@ -2,212 +2,259 @@ import SwiftUI
 
 struct PracticeView: View {
     @StateObject private var viewModel = PracticeViewModel()
-    @State private var selectedCategory: QuestionCategory?
-    @State private var showingQuestionDetail = false
-    @State private var selectedQuestion: Question?
+    @State private var showingResults = false
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(QuestionCategory.allCases, id: \.self) { category in
-                    Section(header: Text(category.rawValue)) {
-                        ForEach(viewModel.questions.filter { $0.category == category.rawValue }) { question in
-                            QuestionRow(question: question)
-                                .onTapGesture {
-                                    selectedQuestion = question
-                                    showingQuestionDetail = true
-                                }
+            Group {
+                switch viewModel.quizState {
+                case .selectingCategory:
+                    categorySelectionView
+                case .loading:
+                    loadingView
+                case .practicing:
+                    quizView
+                case .completed:
+                    Color.clear
+                        .onAppear {
+                            showingResults = true
                         }
-                    }
                 }
             }
-            .navigationTitle("Practice")
-            .sheet(isPresented: $showingQuestionDetail) {
-                if let question = selectedQuestion {
-                    PracticeQuestionView(question: question)
-                }
+            .navigationTitle("Practice Interview")
+            .alert("Error", isPresented: $viewModel.showError) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(viewModel.errorMessage ?? "An unknown error occurred")
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Menu {
-                        ForEach(QuestionCategory.allCases, id: \.self) { category in
-                            Button(category.rawValue) {
-                                selectedCategory = category
-                                viewModel.loadQuestions(for: category)
-                            }
+            .sheet(isPresented: $showingResults) {
+                QuizResultView(
+                    score: viewModel.score,
+                    totalQuestions: viewModel.quizQuestions.count,
+                    onPracticeAgain: {
+                        Task { @MainActor in
+                            viewModel.resetQuiz()
                         }
-                    } label: {
-                        Image(systemName: "line.3.horizontal.decrease.circle")
-                    }
-                }
+                    },
+                    category: viewModel.quizQuestions.first?.category,
+                    date: Date(),
+                    questions: nil
+                )
+            }
+            .onAppear {
+                print("[PracticeView] View appeared")
+            }
+            .onDisappear {
+                print("[PracticeView] View disappeared")
             }
         }
     }
-}
-
-struct QuestionRow: View {
-    let question: Question
     
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(question.text ?? "No question text available")
-                .font(.headline)
+    private var categorySelectionView: some View {
+        List(QuestionCategory.allCases) { category in
+            Button {
+                print("[PracticeView] Selected category: \(category.rawValue)")
+                Task {
+                    await viewModel.generateQuiz(for: category)
+                }
+            } label: {
+                HStack {
+                    Image(systemName: category.iconName)
+                        .font(.title2)
+                        .foregroundColor(.accentColor)
+                        .frame(width: 40)
+                    
+                    VStack(alignment: .leading) {
+                        Text(category.rawValue)
+                            .font(.headline)
+                        Text(category.description)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .padding(.vertical, 8)
+            }
+        }
+    }
+    
+    private var loadingView: some View {
+        VStack {
+            ProgressView()
+                .scaleEffect(1.5)
+            Text("Generating questions...")
+                .padding(.top)
+        }
+        .onAppear {
+            print("[PracticeView] Loading view appeared")
+        }
+    }
+    
+    private var quizView: some View {
+        VStack(spacing: 20) {
+            if let currentQuestion = viewModel.quizQuestions[safe: viewModel.currentQuestionIndex] {
+                // Progress indicator
+                ProgressView(value: Double(viewModel.currentQuestionIndex + 1),
+                           total: Double(viewModel.quizQuestions.count))
+                    .padding(.horizontal)
+                    .transition(.opacity)
+                
+                // Question text
+                Text(currentQuestion.questionText)
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .transition(.asymmetric(
+                        insertion: .scale(scale: 0.8).combined(with: .opacity),
+                        removal: .scale(scale: 1.2).combined(with: .opacity)
+                    ))
+                
+                // Options
+                VStack(spacing: 12) {
+                    ForEach(currentQuestion.options.indices, id: \.self) { index in
+                        OptionButton(
+                            text: currentQuestion.options[index],
+                            isSelected: viewModel.selectedOptionIndex == index,
+                            isCorrect: viewModel.isAnswerSubmitted ? index == currentQuestion.correctOptionIndex : nil,
+                            isDisabled: viewModel.isAnswerSubmitted
+                        ) {
+                            print("[PracticeView] Option selected at index: \(index)")
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                viewModel.selectAnswer(at: index)
+                            }
+                        }
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .trailing).combined(with: .opacity),
+                            removal: .move(edge: .leading).combined(with: .opacity)
+                        ))
+                        .animation(.spring(response: 0.3, dampingFraction: 0.7).delay(Double(index) * 0.1), value: viewModel.currentQuestionIndex)
+                    }
+                }
+                .padding(.horizontal)
+                
+                // Feedback
+                if let feedback = viewModel.feedbackMessage {
+                    Text(feedback)
+                        .foregroundColor(viewModel.selectedOptionIndex == currentQuestion.correctOptionIndex ? .green : .red)
+                        .padding()
+                        .transition(.scale.combined(with: .opacity))
+                }
+                
+                // Action buttons
+                if viewModel.isAnswerSubmitted {
+                    Button("Next Question") {
+                        print("[PracticeView] Next question button tapped")
+                        withAnimation {
+                            viewModel.nextQuestion()
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .padding()
+                    .transition(.scale.combined(with: .opacity))
+                } else {
+                    Button("Submit") {
+                        print("[PracticeView] Submit button tapped")
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            viewModel.submitAnswer()
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(viewModel.selectedOptionIndex == nil)
+                    .padding()
+                    .transition(.scale.combined(with: .opacity))
+                }
+            }
+        }
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: viewModel.currentQuestionIndex)
+        .onAppear {
+            print("[PracticeView] Quiz view appeared - Question \(viewModel.currentQuestionIndex + 1) of \(viewModel.quizQuestions.count)")
+        }
+    }
+    
+    private var completionView: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "checkmark.circle.fill")
+                .font(.system(size: 60))
+                .foregroundColor(.green)
             
-            HStack {
-                Label(question.difficulty ?? "Unknown", systemImage: "chart.bar")
-                Spacer()
-                if question.hasResponse {
-                    Label("Practiced", systemImage: "checkmark.circle.fill")
-                        .foregroundColor(.green)
-                }
+            Text("Quiz Complete!")
+                .font(.title)
+            
+            Text("You scored \(viewModel.score) out of \(viewModel.quizQuestions.count)")
+                .font(.title2)
+            
+            Button("Try Another Category") {
+                print("[PracticeView] Try another category button tapped")
+                viewModel.resetQuiz()
             }
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .buttonStyle(.borderedProminent)
+            .padding()
         }
-        .padding(.vertical, 4)
+        .onAppear {
+            print("[PracticeView] Completion view appeared - Final score: \(viewModel.score)/\(viewModel.quizQuestions.count)")
+        }
     }
 }
 
-struct PracticeQuestionView: View {
-    let question: Question
-    @StateObject private var viewModel = PracticeQuestionViewModel()
-    @Environment(\.dismiss) private var dismiss
+struct OptionButton: View {
+    let text: String
+    let isSelected: Bool
+    let isCorrect: Bool?
+    let isDisabled: Bool
+    let action: () -> Void
+    
+    @State private var isPressed = false
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    // Question
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Question")
-                            .font(.headline)
-                        Text(question.text ?? "No question text available")
-                            .padding()
-                            .background(Color.blue.opacity(0.1))
-                            .cornerRadius(10)
-                    }
-                    
-                    // Recording Controls
-                    VStack {
-                        if viewModel.isRecording {
-                            Text(viewModel.transcript ?? "Listening...")
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(10)
-                        }
-                        
-                        HStack {
-                            Button(action: {
-                                if viewModel.isRecording {
-                                    viewModel.stopRecording()
-                                } else {
-                                    viewModel.startRecording()
-                                }
-                            }) {
-                                Image(systemName: viewModel.isRecording ? "stop.circle.fill" : "mic.circle.fill")
-                                    .font(.system(size: 64))
-                                    .foregroundColor(viewModel.isRecording ? .red : .blue)
-                            }
-                            
-                            if !viewModel.isRecording {
-                                Button(action: {
-                                    viewModel.generateAIResponse()
-                                }) {
-                                    Image(systemName: "wand.and.stars")
-                                        .font(.system(size: 64))
-                                        .foregroundColor(.purple)
-                                }
-                            }
-                        }
-                    }
-                    
-                    // AI Response
-                    if let aiResponse = viewModel.aiResponse {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Suggested Response")
-                                .font(.headline)
-                            Text(aiResponse)
-                                .padding()
-                                .background(Color.green.opacity(0.1))
-                                .cornerRadius(10)
-                        }
-                    }
-                    
-                    // Tips
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Tips")
-                            .font(.headline)
-                        ForEach(viewModel.tips, id: \.self) { tip in
-                            HStack(alignment: .top) {
-                                Image(systemName: "lightbulb.fill")
-                                    .foregroundColor(.yellow)
-                                Text(tip)
-                            }
-                            .padding(.vertical, 4)
-                        }
-                    }
-                }
+        Button(action: action) {
+            Text(text)
+                .font(.body)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
                 .padding()
-            }
-            .navigationTitle("Practice Question")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                }
-            }
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(backgroundColor)
+                        .shadow(color: shadowColor, radius: isPressed ? 2 : 4, x: 0, y: isPressed ? 1 : 2)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(borderColor, lineWidth: 2)
+                )
+                .scaleEffect(isPressed ? 0.98 : 1.0)
         }
+        .buttonStyle(PlainButtonStyle())
+        .disabled(isDisabled)
+        .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                isPressed = pressing
+            }
+        }, perform: { })
+    }
+    
+    private var backgroundColor: Color {
+        if let isCorrect = isCorrect {
+            return isCorrect ? .green.opacity(0.2) : .red.opacity(0.2)
+        }
+        return isSelected ? Color.accentColor.opacity(0.2) : Color(.systemBackground)
+    }
+    
+    private var borderColor: Color {
+        if let isCorrect = isCorrect {
+            return isCorrect ? .green : .red
+        }
+        return isSelected ? .accentColor : Color(.systemGray4)
+    }
+    
+    private var shadowColor: Color {
+        if let isCorrect = isCorrect {
+            return isCorrect ? .green.opacity(0.3) : .red.opacity(0.3)
+        }
+        return isSelected ? .accentColor.opacity(0.3) : Color(.systemGray4)
     }
 }
 
-class PracticeViewModel: ObservableObject {
-    @Published var questions: [Question] = []
-    @Published var isLoading = false
-    @Published var error: Error?
-    
-    func loadQuestions(for category: QuestionCategory) {
-        // TODO: Implement question loading from Core Data or API
-        // For now, using sample questions
-        questions = [
-            Question(context: PersistenceController.preview.container.viewContext),
-            Question(context: PersistenceController.preview.container.viewContext),
-            Question(context: PersistenceController.preview.container.viewContext)
-        ]
-    }
-}
-
-class PracticeQuestionViewModel: ObservableObject {
-    @Published var isRecording = false
-    @Published var transcript: String?
-    @Published var aiResponse: String?
-    @Published var tips: [String] = [
-        "Structure your response with a clear beginning, middle, and end",
-        "Use specific examples from your experience",
-        "Keep your answer concise and focused",
-        "Show enthusiasm and confidence in your delivery"
-    ]
-    
-    func startRecording() {
-        // TODO: Implement speech recognition
-        isRecording = true
-    }
-    
-    func stopRecording() {
-        // TODO: Implement speech recognition stop
-        isRecording = false
-    }
-    
-    func generateAIResponse() {
-        // TODO: Implement AI response generation
-        aiResponse = "Here's a suggested response structure..."
-    }
-}
-
-struct PracticeView_Previews: PreviewProvider {
-    static var previews: some View {
-        PracticeView()
+extension Array {
+    subscript(safe index: Index) -> Element? {
+        indices.contains(index) ? self[index] : nil
     }
 } 
