@@ -12,11 +12,14 @@ struct InterviewAceView: View {
             
             // Status Indicators
             HStack(spacing: 20) {
-                StatusIndicator(
-                    title: "Listening",
-                    isActive: viewModel.isListening,
-                    color: .blue
-                )
+                VStack {
+                    Circle()
+                        .fill(viewModel.isRecording ? Color.clear : Color.gray)
+                        .frame(width: 20, height: 20)
+                    Text("Listening")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
                 
                 StatusIndicator(
                     title: "Processing",
@@ -24,6 +27,7 @@ struct InterviewAceView: View {
                     color: .orange
                 )
             }
+            .padding(.horizontal)
             
             // Transcribed Text
             ScrollView {
@@ -58,26 +62,29 @@ struct InterviewAceView: View {
             
             // Control Button
             Button(action: {
-                if viewModel.isListening {
-                    viewModel.stopListening()
+                if viewModel.isRecording {
+                    viewModel.stopRecording()
                 } else {
-                    viewModel.startListening()
+                    viewModel.startRecording()
                 }
             }) {
                 HStack {
-                    Image(systemName: viewModel.isListening ? "stop.fill" : "mic.fill")
-                    Text(viewModel.isListening ? "Stop" : "Start")
+                    Image(systemName: viewModel.isRecording ? "stop.fill" : "mic.fill")
+                    Text(viewModel.isRecording ? "Stop" : "Start")
                 }
                 .font(.title2)
                 .foregroundColor(.white)
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(viewModel.isListening ? Color.red : Color.blue)
+                .background(viewModel.isRecording ? Color.red : Color.blue)
                 .cornerRadius(15)
             }
             .padding(.horizontal)
         }
         .padding()
+        .fullScreenCover(isPresented: $viewModel.isRecording) {
+            RecordingView<InterviewAceViewModel>(viewModel: viewModel)
+        }
     }
 }
 

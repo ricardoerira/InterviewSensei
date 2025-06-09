@@ -36,6 +36,12 @@
 		41795B3C2DF251480012B052 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41795B3B2DF251480012B052 /* QuizResultView.swift */; };
 		41831DA82DF483DC00B3A18C /* QuizStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41831DA72DF483DC00B3A18C /* QuizStatisticsView.swift */; };
 		41831DAA2DF4869E00B3A18C /* QuizStatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41831DA92DF4869E00B3A18C /* QuizStatisticsViewModel.swift */; };
+		419051562DF72FD10068D58F /* InterviewWarmupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051552DF72FD10068D58F /* InterviewWarmupViewModel.swift */; };
+		419051582DF72FDA0068D58F /* InterviewWarmupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051572DF72FDA0068D58F /* InterviewWarmupView.swift */; };
+		4190515B2DF733790068D58F /* AudioTranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051592DF733790068D58F /* AudioTranscriptionService.swift */; };
+		419051612DF73EF90068D58F /* RecordingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051602DF73EF80068D58F /* RecordingIndicator.swift */; };
+		419051632DF7437F0068D58F /* WaveAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051622DF7437F0068D58F /* WaveAnimationView.swift */; };
+		419051652DF749230068D58F /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051642DF749220068D58F /* RecordingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +95,12 @@
 		41795B3B2DF251480012B052 /* QuizResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		41831DA72DF483DC00B3A18C /* QuizStatisticsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizStatisticsView.swift; sourceTree = "<group>"; };
 		41831DA92DF4869E00B3A18C /* QuizStatisticsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizStatisticsViewModel.swift; sourceTree = "<group>"; };
+		419051552DF72FD10068D58F /* InterviewWarmupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterviewWarmupViewModel.swift; sourceTree = "<group>"; };
+		419051572DF72FDA0068D58F /* InterviewWarmupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterviewWarmupView.swift; sourceTree = "<group>"; };
+		419051592DF733790068D58F /* AudioTranscriptionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioTranscriptionService.swift; sourceTree = "<group>"; };
+		419051602DF73EF80068D58F /* RecordingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingIndicator.swift; sourceTree = "<group>"; };
+		419051622DF7437F0068D58F /* WaveAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveAnimationView.swift; sourceTree = "<group>"; };
+		419051642DF749220068D58F /* RecordingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +205,7 @@
 		4167A0B12DD63FCB0008D0DA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				419051592DF733790068D58F /* AudioTranscriptionService.swift */,
 				41508C392DEA456000CF5AD1 /* CVProcessingService.swift */,
 				4167A0D72DD648220008D0DA /* GeminiService.swift */,
 				4167A0DC2DD698710008D0DA /* QuestionDetector.swift */,
@@ -203,6 +216,10 @@
 		4167A0B32DD63FCB0008D0DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				419051642DF749220068D58F /* RecordingView.swift */,
+				419051622DF7437F0068D58F /* WaveAnimationView.swift */,
+				419051602DF73EF80068D58F /* RecordingIndicator.swift */,
+				419051572DF72FDA0068D58F /* InterviewWarmupView.swift */,
 				41831DA72DF483DC00B3A18C /* QuizStatisticsView.swift */,
 				41795B3B2DF251480012B052 /* QuizResultView.swift */,
 				41795B352DF24CA80012B052 /* PracticeView.swift */,
@@ -217,6 +234,7 @@
 		4167A0BB2DD63FCC0008D0DA /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				419051552DF72FD10068D58F /* InterviewWarmupViewModel.swift */,
 				41831DA92DF4869E00B3A18C /* QuizStatisticsViewModel.swift */,
 				41795B372DF24CAF0012B052 /* PracticeViewModel.swift */,
 				41795B2B2DF214B10012B052 /* InterviewAceViewModel.swift */,
@@ -378,12 +396,15 @@
 				41795B282DF2117E0012B052 /* InterviewTypes.swift in Sources */,
 				4167A0DB2DD64DF90008D0DA /* InterviewSettings.swift in Sources */,
 				4167A0D02DD63FCF0008D0DA /* InterviewSensei.xcdatamodeld in Sources */,
+				419051562DF72FD10068D58F /* InterviewWarmupViewModel.swift in Sources */,
 				41831DAA2DF4869E00B3A18C /* QuizStatisticsViewModel.swift in Sources */,
 				41831DA82DF483DC00B3A18C /* QuizStatisticsView.swift in Sources */,
+				419051632DF7437F0068D58F /* WaveAnimationView.swift in Sources */,
 				41508C382DEA453A00CF5AD1 /* CVImportViewModel.swift in Sources */,
 				41795B382DF24CAF0012B052 /* PracticeViewModel.swift in Sources */,
 				41795B3C2DF251480012B052 /* QuizResultView.swift in Sources */,
 				41795B362DF24CA80012B052 /* PracticeView.swift in Sources */,
+				419051652DF749230068D58F /* RecordingView.swift in Sources */,
 				41274D6E2DD63A6400064172 /* Persistence.swift in Sources */,
 				41274D672DD63A6000064172 /* ContentView.swift in Sources */,
 				41274D652DD63A6000064172 /* InterviewSenseiApp.swift in Sources */,
@@ -392,7 +413,10 @@
 				4167A0DD2DD698710008D0DA /* QuestionDetector.swift in Sources */,
 				4167A0D82DD648220008D0DA /* GeminiService.swift in Sources */,
 				41795B2A2DF214180012B052 /* InterviewAceView.swift in Sources */,
+				4190515B2DF733790068D58F /* AudioTranscriptionService.swift in Sources */,
 				4167A0C82DD63FCF0008D0DA /* MainTabView.swift in Sources */,
+				419051582DF72FDA0068D58F /* InterviewWarmupView.swift in Sources */,
+				419051612DF73EF90068D58F /* RecordingIndicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

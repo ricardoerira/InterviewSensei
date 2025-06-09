@@ -1,11 +1,16 @@
 import SwiftUI
 
 struct MainTabView: View {
+
     var body: some View {
         TabView {
             InterviewAceView()
                 .tabItem {
                     Label("Interview", systemImage: "mic.fill")
+                }
+            InterviewWarmupView()
+                .tabItem {
+                    Label("Warmup", systemImage: "waveform.badge.magnifyingglass")
                 }
             CVImportView(viewModel: CVImportViewModel())
                 .tabItem {
