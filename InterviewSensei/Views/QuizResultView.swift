@@ -63,6 +63,7 @@ struct QuizResultView: View {
 
     @State private var animatedScore: Double = 0
     @State private var showQuestions: Bool = false
+    @State private var isAppeared: Bool = false
 
     private var percentage: Double {
         guard totalQuestions > 0 else { return 0 }
@@ -84,17 +85,23 @@ struct QuizResultView: View {
                     Text("Quiz Result")
                         .font(.largeTitle)
                         .bold()
+                        .opacity(isAppeared ? 1 : 0)
+                        .animation(.easeIn(duration: 0.5), value: isAppeared)
                     
                     if let category = category {
                         Text(category)
                             .font(.title3)
                             .foregroundColor(.secondary)
+                            .opacity(isAppeared ? 1 : 0)
+                            .animation(.easeIn(duration: 0.5).delay(0.2), value: isAppeared)
                     }
                     
                     if let date = date {
                         Text(dateFormatter.string(from: date))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
+                            .opacity(isAppeared ? 1 : 0)
+                            .animation(.easeIn(duration: 0.5).delay(0.3), value: isAppeared)
                     }
                 }
 
@@ -127,6 +134,8 @@ struct QuizResultView: View {
                     }
                 }
                 .frame(width: 200, height: 200)
+                .opacity(isAppeared ? 1 : 0)
+                .animation(.easeIn(duration: 0.5).delay(0.4), value: isAppeared)
 
                 // Score Breakdown
                 VStack(spacing: 16) {
@@ -195,11 +204,13 @@ struct QuizResultView: View {
             .padding()
         }
         .onAppear {
+            isAppeared = true
             withAnimation(.easeOut(duration: 1.0)) {
                 animatedScore = percentage
             }
         }
         .onDisappear {
+            isAppeared = false
             animatedScore = 0
         }
     }

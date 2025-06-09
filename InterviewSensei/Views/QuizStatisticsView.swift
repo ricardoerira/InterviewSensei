@@ -99,7 +99,9 @@ struct QuizStatisticsView: View {
             .refreshable {
                 viewModel.loadQuizResults()
             }
-            .sheet(isPresented: $showingDetail) {
+            .sheet(isPresented: $showingDetail, onDismiss: {
+                selectedResult = nil
+            }) {
                 if let result = selectedResult {
                     QuizResultView(
                         score: Int(result.score),
@@ -111,6 +113,7 @@ struct QuizStatisticsView: View {
                         date: result.date,
                         questions: (result.questions?.allObjects as? [QuizQuestionResult]) ?? []
                     )
+                    .transition(.opacity)
                 }
             }
         }
