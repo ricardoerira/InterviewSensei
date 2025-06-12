@@ -42,6 +42,14 @@
 		419051652DF749230068D58F /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051642DF749220068D58F /* RecordingView.swift */; };
 		F843669C2DFB12E2001E5237 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F843669B2DFB12E2001E5237 /* ViewModifiers.swift */; };
 		F843669F2DFB21B2001E5237 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = F843669E2DFB21B2001E5237 /* WhisperKit */; };
+		F84366A12DFB2ABA001E5237 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84366A02DFB2ABA001E5237 /* OnboardingView.swift */; };
+		F84366A32DFB2FA0001E5237 /* Remote_Developer_Job_Video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F84366A22DFB2FA0001E5237 /* Remote_Developer_Job_Video.mp4 */; };
+		F84366A52DFB314E001E5237 /* Job_Celebration_Video_Created.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F84366A42DFB314D001E5237 /* Job_Celebration_Video_Created.mp4 */; };
+		F84366A72DFB386D001E5237 /* Video_Creation_Request_Fulfilled.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F84366A62DFB386D001E5237 /* Video_Creation_Request_Fulfilled.mp4 */; };
+		F8CA993F2DFB40F600847A60 /* 2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8CA993C2DFB40F400847A60 /* 2.mp4 */; };
+		F8CA99402DFB40F600847A60 /* 1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8CA993B2DFB40F400847A60 /* 1.mp4 */; };
+		F8CA99412DFB40F600847A60 /* 3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8CA993D2DFB40F400847A60 /* 3.mp4 */; };
+		F8CA99422DFB40F600847A60 /* 4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8CA993E2DFB40F400847A60 /* 4.mp4 */; };
 		F8F8A5122DF8C40700520E7E /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8A5112DF8C40700520E7E /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +111,14 @@
 		419051622DF7437F0068D58F /* WaveAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveAnimationView.swift; sourceTree = "<group>"; };
 		419051642DF749220068D58F /* RecordingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
 		F843669B2DFB12E2001E5237 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
+		F84366A02DFB2ABA001E5237 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		F84366A22DFB2FA0001E5237 /* Remote_Developer_Job_Video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Remote_Developer_Job_Video.mp4; sourceTree = "<group>"; };
+		F84366A42DFB314D001E5237 /* Job_Celebration_Video_Created.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Job_Celebration_Video_Created.mp4; sourceTree = "<group>"; };
+		F84366A62DFB386D001E5237 /* Video_Creation_Request_Fulfilled.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Video_Creation_Request_Fulfilled.mp4; sourceTree = "<group>"; };
+		F8CA993B2DFB40F400847A60 /* 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.mp4; sourceTree = "<group>"; };
+		F8CA993C2DFB40F400847A60 /* 2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.mp4; sourceTree = "<group>"; };
+		F8CA993D2DFB40F400847A60 /* 3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.mp4; sourceTree = "<group>"; };
+		F8CA993E2DFB40F400847A60 /* 4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4.mp4; sourceTree = "<group>"; };
 		F8F8A5112DF8C40700520E7E /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +236,7 @@
 		4167A0B32DD63FCB0008D0DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F84366A02DFB2ABA001E5237 /* OnboardingView.swift */,
 				F843669B2DFB12E2001E5237 /* ViewModifiers.swift */,
 				F8F8A5112DF8C40700520E7E /* BackgroundView.swift */,
 				419051642DF749220068D58F /* RecordingView.swift */,
@@ -233,6 +250,13 @@
 				41508C352DEA44AE00CF5AD1 /* CVImportView.swift */,
 				4167A0B42DD63FCB0008D0DA /* MainTabView.swift */,
 				4167A0B52DD63FCB0008D0DA /* ProfileView.swift */,
+				F8CA993B2DFB40F400847A60 /* 1.mp4 */,
+				F8CA993C2DFB40F400847A60 /* 2.mp4 */,
+				F8CA993D2DFB40F400847A60 /* 3.mp4 */,
+				F8CA993E2DFB40F400847A60 /* 4.mp4 */,
+				F84366A62DFB386D001E5237 /* Video_Creation_Request_Fulfilled.mp4 */,
+				F84366A42DFB314D001E5237 /* Job_Celebration_Video_Created.mp4 */,
+				F84366A22DFB2FA0001E5237 /* Remote_Developer_Job_Video.mp4 */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -369,8 +393,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F84366A52DFB314E001E5237 /* Job_Celebration_Video_Created.mp4 in Resources */,
+				F8CA993F2DFB40F600847A60 /* 2.mp4 in Resources */,
+				F8CA99402DFB40F600847A60 /* 1.mp4 in Resources */,
+				F8CA99412DFB40F600847A60 /* 3.mp4 in Resources */,
+				F8CA99422DFB40F600847A60 /* 4.mp4 in Resources */,
 				41274D6C2DD63A6400064172 /* Preview Assets.xcassets in Resources */,
+				F84366A72DFB386D001E5237 /* Video_Creation_Request_Fulfilled.mp4 in Resources */,
 				41795B2F2DF2381B0012B052 /* GoogleService-Info.plist in Resources */,
+				F84366A32DFB2FA0001E5237 /* Remote_Developer_Job_Video.mp4 in Resources */,
 				4167A0D62DD63FD00008D0DA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +430,7 @@
 				41795B3A2DF24CCC0012B052 /* QuizModels.swift in Sources */,
 				F843669C2DFB12E2001E5237 /* ViewModifiers.swift in Sources */,
 				41795B2C2DF214B20012B052 /* InterviewAceViewModel.swift in Sources */,
+				F84366A12DFB2ABA001E5237 /* OnboardingView.swift in Sources */,
 				41508C3A2DEA456000CF5AD1 /* CVProcessingService.swift in Sources */,
 				41795B282DF2117E0012B052 /* InterviewTypes.swift in Sources */,
 				4167A0DB2DD64DF90008D0DA /* InterviewSettings.swift in Sources */,

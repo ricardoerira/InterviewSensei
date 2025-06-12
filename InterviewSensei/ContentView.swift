@@ -9,11 +9,18 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
     let persistenceController = PersistenceController.shared
     
     var body: some View {
+        Group {
+            if !hasCompletedOnboarding {
+                OnboardingView()
+            } else {
         MainTabView()
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            }
+        }
     }
 }
 
