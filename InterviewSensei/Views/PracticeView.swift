@@ -94,6 +94,7 @@ struct PracticeView: View {
                 .padding(.vertical, 8)
                 
             }        .background(Color.white.opacity(0.15))
+            .buttonStyle(GlassButtonStyle())
 
         }
              
@@ -222,43 +223,7 @@ struct PracticeView: View {
                             viewModel.nextQuestion()
                         }
                     }
-                    .font(.headline)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 12)
-                    .background(
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(.ultraThinMaterial)
-                            
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(
-                                    LinearGradient(
-                                        colors: [
-                                            Color("Blue").opacity(0.7),
-                                            Color("Blue").opacity(0.5)
-                                        ],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                            
-                            RoundedRectangle(cornerRadius: 16)
-                                .strokeBorder(
-                                    LinearGradient(
-                                        colors: [
-                                            .white.opacity(0.5),
-                                            .white.opacity(0.2),
-                                            .clear
-                                        ],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ),
-                                    lineWidth: 1
-                                )
-                        }
-                    )
-                    .foregroundColor(.white)
-                    .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+                    .buttonStyle(GlassButtonStyle())
                     .padding()
                     .transition(.scale.combined(with: .opacity))
                 } else {
@@ -268,43 +233,7 @@ struct PracticeView: View {
                             viewModel.submitAnswer()
                         }
                     }
-                    .font(.headline)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 12)
-                    .background(
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(.ultraThinMaterial)
-                            
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(
-                                    LinearGradient(
-                                        colors: [
-                                            (viewModel.selectedOptionIndex == nil ? Color.gray : Color.green).opacity(0.7),
-                                            (viewModel.selectedOptionIndex == nil ? Color.gray : Color.green).opacity(0.5)
-                                        ],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                            
-                            RoundedRectangle(cornerRadius: 16)
-                                .strokeBorder(
-                                    LinearGradient(
-                                        colors: [
-                                            .white.opacity(0.5),
-                                            .white.opacity(0.2),
-                                            .clear
-                                        ],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ),
-                                    lineWidth: 1
-                                )
-                        }
-                    )
-                    .foregroundColor(.white)
-                    .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+                    .buttonStyle(GlassButtonStyle(gradient: LinearGradient(colors: [(viewModel.selectedOptionIndex == nil ? Color.gray : Color.green).opacity(0.7), (viewModel.selectedOptionIndex == nil ? Color.gray : Color.green).opacity(0.5)], startPoint: .topLeading, endPoint: .bottomTrailing)))
                     .disabled(viewModel.selectedOptionIndex == nil)
                     .opacity(viewModel.selectedOptionIndex == nil ? 0.6 : 1.0)
                     .padding()
@@ -377,7 +306,7 @@ struct PracticeView: View {
                 print("[PracticeView] Try another category button tapped")
                 viewModel.resetQuiz()
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(GlassButtonStyle())
             .padding()
         }
         .onAppear {
@@ -500,4 +429,46 @@ private func formatTime(_ timeInterval: TimeInterval) -> String {
     let seconds = Int(timeInterval) % 60
     let milliseconds = Int((timeInterval.truncatingRemainder(dividingBy: 1)) * 10)
     return String(format: "%02d:%02d.%01d", minutes, seconds, milliseconds)
+}
+
+struct GlassButtonStyle: ButtonStyle {
+    var gradient: LinearGradient = LinearGradient(
+        colors: [Color("Blue").opacity(0.7), Color("Blue").opacity(0.5)],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    var cornerRadius: CGFloat = 16
+    var padding: EdgeInsets = EdgeInsets(top: 12, leading: 24, bottom: 12, trailing: 24)
+    var font: Font = .headline
+    var foreground: Color = .white
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(font)
+            .foregroundColor(foreground)
+            .padding(padding)
+            .background(
+                ZStack {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(.ultraThinMaterial)
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(gradient)
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .strokeBorder(
+                            LinearGradient(
+                                colors: [
+                                    .white.opacity(0.5),
+                                    .white.opacity(0.2),
+                                    .clear
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
+                }
+            )
+            .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
+            .opacity(configuration.isPressed ? 0.85 : 1.0)
+    }
 }

@@ -43,9 +43,6 @@
 		F843669C2DFB12E2001E5237 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F843669B2DFB12E2001E5237 /* ViewModifiers.swift */; };
 		F843669F2DFB21B2001E5237 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = F843669E2DFB21B2001E5237 /* WhisperKit */; };
 		F84366A12DFB2ABA001E5237 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84366A02DFB2ABA001E5237 /* OnboardingView.swift */; };
-		F84366A32DFB2FA0001E5237 /* Remote_Developer_Job_Video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F84366A22DFB2FA0001E5237 /* Remote_Developer_Job_Video.mp4 */; };
-		F84366A52DFB314E001E5237 /* Job_Celebration_Video_Created.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F84366A42DFB314D001E5237 /* Job_Celebration_Video_Created.mp4 */; };
-		F84366A72DFB386D001E5237 /* Video_Creation_Request_Fulfilled.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F84366A62DFB386D001E5237 /* Video_Creation_Request_Fulfilled.mp4 */; };
 		F8CA993F2DFB40F600847A60 /* 2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8CA993C2DFB40F400847A60 /* 2.mp4 */; };
 		F8CA99402DFB40F600847A60 /* 1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8CA993B2DFB40F400847A60 /* 1.mp4 */; };
 		F8CA99412DFB40F600847A60 /* 3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8CA993D2DFB40F400847A60 /* 3.mp4 */; };
@@ -112,9 +109,6 @@
 		419051642DF749220068D58F /* RecordingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
 		F843669B2DFB12E2001E5237 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		F84366A02DFB2ABA001E5237 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		F84366A22DFB2FA0001E5237 /* Remote_Developer_Job_Video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Remote_Developer_Job_Video.mp4; sourceTree = "<group>"; };
-		F84366A42DFB314D001E5237 /* Job_Celebration_Video_Created.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Job_Celebration_Video_Created.mp4; sourceTree = "<group>"; };
-		F84366A62DFB386D001E5237 /* Video_Creation_Request_Fulfilled.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Video_Creation_Request_Fulfilled.mp4; sourceTree = "<group>"; };
 		F8CA993B2DFB40F400847A60 /* 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.mp4; sourceTree = "<group>"; };
 		F8CA993C2DFB40F400847A60 /* 2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.mp4; sourceTree = "<group>"; };
 		F8CA993D2DFB40F400847A60 /* 3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.mp4; sourceTree = "<group>"; };
@@ -254,9 +248,6 @@
 				F8CA993C2DFB40F400847A60 /* 2.mp4 */,
 				F8CA993D2DFB40F400847A60 /* 3.mp4 */,
 				F8CA993E2DFB40F400847A60 /* 4.mp4 */,
-				F84366A62DFB386D001E5237 /* Video_Creation_Request_Fulfilled.mp4 */,
-				F84366A42DFB314D001E5237 /* Job_Celebration_Video_Created.mp4 */,
-				F84366A22DFB2FA0001E5237 /* Remote_Developer_Job_Video.mp4 */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -393,15 +384,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F84366A52DFB314E001E5237 /* Job_Celebration_Video_Created.mp4 in Resources */,
 				F8CA993F2DFB40F600847A60 /* 2.mp4 in Resources */,
 				F8CA99402DFB40F600847A60 /* 1.mp4 in Resources */,
 				F8CA99412DFB40F600847A60 /* 3.mp4 in Resources */,
 				F8CA99422DFB40F600847A60 /* 4.mp4 in Resources */,
 				41274D6C2DD63A6400064172 /* Preview Assets.xcassets in Resources */,
-				F84366A72DFB386D001E5237 /* Video_Creation_Request_Fulfilled.mp4 in Resources */,
 				41795B2F2DF2381B0012B052 /* GoogleService-Info.plist in Resources */,
-				F84366A32DFB2FA0001E5237 /* Remote_Developer_Job_Video.mp4 in Resources */,
 				4167A0D62DD63FD00008D0DA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

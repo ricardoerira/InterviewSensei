@@ -100,7 +100,9 @@ struct OnboardingView: View {
                             gradient: Gradient(colors: [
                                 .clear,
                                 .clear,
-                                Color("Blue").opacity(0.5),
+                                .clear,
+                                .clear,
+                                Color("Blue").opacity(0.3),
                             ]),
                             startPoint: .bottom,
                             endPoint: .top
@@ -113,22 +115,30 @@ struct OnboardingView: View {
                 Spacer()
                 TabView(selection: $currentStep) {
                     ForEach(0..<steps.count, id: \.self) { index in
-                        VStack(spacing: 20) {
-                          
+                        VStack(spacing: 10) {
+                            Image("logo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 70, height: 70)
+                                .padding()
                             
                             Text(steps[index].title)
                                 .font(.title)
                                 .bold()
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.white)
-                                .padding()
+                                .padding(.horizontal, 50)
+                                .fixedSize(horizontal: false, vertical: true)
+
 //                                .liquidGlass()
                             
                             Text(steps[index].description)
                                 .font(.body)
                                 .multilineTextAlignment(.center)
-                                .padding(.horizontal)
                                 .foregroundColor(.white)
+                                .padding(.horizontal)
+                                .fixedSize(horizontal: false, vertical: true)
+
                                 .padding()
 //                                .liquidGlass()
                         }
@@ -148,21 +158,17 @@ struct OnboardingView: View {
                 // Navigation Buttons
                 HStack {
                     if currentStep > 0 {
-                        Button(action: {
-                            withAnimation {
-                                currentStep -= 1
-                            }
-                        }) {
-                            Text("Previous")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-//                                .liquidGlass()
+                        
+                        
+                        Button("Previous") {
+                            currentStep -= 1
                         }
+                        .buttonStyle(GlassButtonStyle())
+                        .padding()
+                        .transition(.scale.combined(with: .opacity))
                     }
                     
-                    Button(action: {
+                    Button(currentStep < steps.count - 1 ? "    Next    " : "Get Started") {
                         if currentStep < steps.count - 1 {
                             withAnimation {
                                 currentStep += 1
@@ -170,14 +176,25 @@ struct OnboardingView: View {
                         } else {
                             hasCompletedOnboarding = true
                         }
-                    }) {
-                        Text(currentStep < steps.count - 1 ? "Next" : "Get Started")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .liquidGlass()
-                    }
+                    }   .buttonStyle(GlassButtonStyle())
+                        .padding()
+                        .transition(.scale.combined(with: .opacity))
+//                    Button(action: {
+//                        if currentStep < steps.count - 1 {
+//                            withAnimation {
+//                                currentStep += 1
+//                            }
+//                        } else {
+//                            hasCompletedOnboarding = true
+//                        }
+//                    }) {
+//                        Text(currentStep < steps.count - 1 ? "Next" : "Get Started")
+//                            .font(.headline)
+//                            .foregroundColor(.white)
+//                            .frame(maxWidth: .infinity)
+//                            .padding()
+//                            .liquidGlass()
+//                    }
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 30)
@@ -206,7 +223,7 @@ struct VideoPlayerView: View {
                                 .clear,
                                 .black.opacity(0.7),
                                 .black.opacity(0.8),
-                                .black.opacity(0.9)
+                                .black.opacity(1.0)
                             ]),
                             startPoint: .top,
                             endPoint: .bottom
