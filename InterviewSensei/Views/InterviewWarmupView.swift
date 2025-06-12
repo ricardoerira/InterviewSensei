@@ -19,26 +19,44 @@ struct InterviewWarmupView: View {
                             .font(.caption)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
-                            .background(Capsule().fill(Color.purple.opacity(0.1)))
+                            .background(
+                                Capsule()
+                                    .fill(.ultraThinMaterial)
+                                    .overlay(
+                                        Capsule()
+                                            .strokeBorder(
+                                                LinearGradient(
+                                                    colors: [
+                                                        Color.purple.opacity(0.5),
+                                                        Color.purple.opacity(0.2),
+                                                        .clear
+                                                    ],
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                ),
+                                                lineWidth: 1
+                                            )
+                                    )
+                            )
                             .foregroundColor(.purple)
                         Spacer()
                         Text(viewModel.questionProgress)
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.white)
                     }
                     Text(viewModel.currentQuestion)
                         .font(.title2)
                         .fontWeight(.semibold)
+                        .foregroundColor(.white)
                         .padding(.top, 5)
                 }
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 15).fill(Color.white))
-                .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
+                .liquidGlass()
+                .padding(.horizontal)
 
                 // Transcription Area
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
-                        // This space intentionally left blank as the full screen cover will handle the recording visualization
                         Spacer()
                         Button {
                             withAnimation {
@@ -46,6 +64,28 @@ struct InterviewWarmupView: View {
                             }
                         } label: {
                             Image(systemName: showingAnswerDetails ? "chevron.up" : "chevron.down")
+                                .foregroundColor(.white)
+                                .padding(8)
+                                .background(
+                                    Circle()
+                                        .fill(.ultraThinMaterial)
+                                        .overlay(
+                                            Circle()
+                                                .strokeBorder(
+                                                    LinearGradient(
+                                                        colors: [
+                                                            .white.opacity(0.5),
+                                                            .white.opacity(0.2),
+                                                            .clear
+                                                        ],
+                                                        startPoint: .topLeading,
+                                                        endPoint: .bottomTrailing
+                                                    ),
+                                                    lineWidth: 1
+                                                )
+                                        )
+                                )
+                                .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
                         }
                     }
                     .padding(.bottom, 5)
@@ -53,11 +93,12 @@ struct InterviewWarmupView: View {
                     if !viewModel.transcribedAnswer.isEmpty {
                         Text(viewModel.transcribedAnswer)
                             .font(.body)
+                            .foregroundColor(.white)
                     }
                 }
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 15).fill(Color.white))
-                .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
+                .liquidGlass()
+                .padding(.horizontal)
 
                 // Action Buttons
                 HStack(spacing: 20) {
@@ -72,9 +113,40 @@ struct InterviewWarmupView: View {
                             .font(.headline)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 10)
-                            .background(viewModel.isRecording ? Color.red : Color.blue)
+                            .background(
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(.ultraThinMaterial)
+                                    
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(
+                                            LinearGradient(
+                                                colors: [
+                                                    (viewModel.isRecording ? Color.red : Color("Blue")).opacity(0.7),
+                                                    (viewModel.isRecording ? Color.red : Color("Blue")).opacity(0.5)
+                                                ],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                        )
+                                    
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .strokeBorder(
+                                            LinearGradient(
+                                                colors: [
+                                                    .white.opacity(0.5),
+                                                    .white.opacity(0.2),
+                                                    .clear
+                                                ],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ),
+                                            lineWidth: 1
+                                        )
+                                }
+                            )
                             .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
                     }
                     .disabled(viewModel.isLoadingTips)
 
@@ -85,9 +157,40 @@ struct InterviewWarmupView: View {
                         Label("Tip", systemImage: "lightbulb.fill")
                             .font(.title2)
                             .padding(10)
-                            .background(Color.blue.opacity(0.1))
-                            .foregroundColor(.blue)
-                            .cornerRadius(10)
+                            .background(
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(.ultraThinMaterial)
+                                    
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(
+                                            LinearGradient(
+                                                colors: [
+                                                    Color("Blue").opacity(0.7),
+                                                    Color("Blue").opacity(0.5)
+                                                ],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                        )
+                                    
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .strokeBorder(
+                                            LinearGradient(
+                                                colors: [
+                                                    .white.opacity(0.5),
+                                                    .white.opacity(0.2),
+                                                    .clear
+                                                ],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ),
+                                            lineWidth: 1
+                                        )
+                                }
+                            )
+                            .foregroundColor(.white)
+                            .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
                     }
                 }
                 .padding(.top, 20)
@@ -98,19 +201,24 @@ struct InterviewWarmupView: View {
                             if viewModel.isLoadingTips {
                                 ProgressView("Generating tips...")
                                     .padding()
+                                    .foregroundColor(.white)
                             } else if !viewModel.tips.isEmpty {
                                 Text("Tips for answers that questions like this:")
                                     .font(.headline)
+                                    .foregroundColor(.white)
                                 Text(viewModel.tips)
                                     .font(.body)
+                                    .foregroundColor(.white)
                             }
 
                             if !viewModel.exampleAnswer.isEmpty {
                                 Text("Example Answer:")
                                     .font(.headline)
+                                    .foregroundColor(.white)
                                     .padding(.top, 10)
                                 Text(viewModel.exampleAnswer)
                                     .font(.body)
+                                    .foregroundColor(.white)
                             }
 
                             if let error = viewModel.errorMessage {
@@ -121,8 +229,8 @@ struct InterviewWarmupView: View {
                             }
                         }
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 15).fill(Color.white))
-                        .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
+                        .liquidGlass()
+                        .padding(.horizontal)
                     }
                 }
 
@@ -132,17 +240,91 @@ struct InterviewWarmupView: View {
                 HStack {
                     Button("Previous Question") {
                         viewModel.previousQuestion()
-                        showingAnswerDetails = false // Collapse details on question change
+                        showingAnswerDetails = false
                     }
                     .disabled(viewModel.currentQuestionIndex == 0 || viewModel.isRecording || viewModel.isLoadingTips)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(.ultraThinMaterial)
+                            
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(
+                                    LinearGradient(
+                                        colors: [
+                                            Color("Blue").opacity(0.7),
+                                            Color("Blue").opacity(0.5)
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                            
+                            RoundedRectangle(cornerRadius: 16)
+                                .strokeBorder(
+                                    LinearGradient(
+                                        colors: [
+                                            .white.opacity(0.5),
+                                            .white.opacity(0.2),
+                                            .clear
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 1
+                                )
+                        }
+                    )
+                    .foregroundColor(.white)
+                    .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+                    .opacity(viewModel.currentQuestionIndex == 0 || viewModel.isRecording || viewModel.isLoadingTips ? 0.6 : 1.0)
 
                     Spacer()
 
                     Button("Next Question") {
                         viewModel.nextQuestion()
-                        showingAnswerDetails = false // Collapse details on question change
+                        showingAnswerDetails = false
                     }
                     .disabled(viewModel.currentQuestionIndex == viewModel.questions.count - 1 || viewModel.isRecording || viewModel.isLoadingTips)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(.ultraThinMaterial)
+                            
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(
+                                    LinearGradient(
+                                        colors: [
+                                            Color("Blue").opacity(0.7),
+                                            Color("Blue").opacity(0.5)
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                            
+                            RoundedRectangle(cornerRadius: 16)
+                                .strokeBorder(
+                                    LinearGradient(
+                                        colors: [
+                                            .white.opacity(0.5),
+                                            .white.opacity(0.2),
+                                            .clear
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 1
+                                )
+                        }
+                    )
+                    .foregroundColor(.white)
+                    .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+                    .opacity(viewModel.currentQuestionIndex == viewModel.questions.count - 1 || viewModel.isRecording || viewModel.isLoadingTips ? 0.6 : 1.0)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 10)

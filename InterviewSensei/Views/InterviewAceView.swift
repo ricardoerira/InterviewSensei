@@ -8,49 +8,37 @@ struct InterviewAceView: View {
             BackgroundView()
             VStack(spacing: 20) {
                 // Header
-                Text("Interview Ace")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+              
                 
-                // Status Indicators
-                HStack(spacing: 20) {
-                    VStack {
-                        Circle()
-                            .fill(viewModel.isRecording ? Color.clear : Color.gray)
-                            .frame(width: 20, height: 20)
-                        Text("Listening")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    StatusIndicator(
-                        title: "Processing",
-                        isActive: viewModel.isProcessing,
-                        color: .orange
-                    )
-                }
-                .padding(.horizontal)
-                
-                // Transcribed Text
-                ScrollView {
-                    Text(viewModel.transcribedText.isEmpty ? "Your speech will appear here..." : viewModel.transcribedText)
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(10)
-                }
-                .frame(height: 150)
-                
-                // Generated Answer
-                if !viewModel.generatedAnswer.isEmpty {
+                  
+                // Transcribed Text and Generated Answer Container
+                VStack(spacing: 4) { // Minimal spacing between elements
+                    // Transcribed Text
                     ScrollView {
-                        Text(viewModel.generatedAnswer)
+                        Text(viewModel.transcribedText.isEmpty ? "The question will appear here..." : viewModel.transcribedText)
                             .padding()
+                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color(.systemGray6))
-                            .cornerRadius(10)
+                            .liquidGlass()
                     }
-                    .frame(height: 200)
+                    .padding(.horizontal)
+                    
+                    // Generated Answer
+                    if !viewModel.generatedAnswer.isEmpty {
+                        Text(viewModel.transcribedText.isEmpty ? "The question will appear here..." : viewModel.transcribedText)
+                            .padding()
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        ScrollView {
+                            Text(viewModel.generatedAnswer)
+                                .bold()
+                                .padding()
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .liquidGlass()
+                        }
+                        .padding(.horizontal)
+                    }
                 }
                 
                 // Error Message
@@ -58,6 +46,7 @@ struct InterviewAceView: View {
                     Text(error)
                         .foregroundColor(.red)
                         .padding()
+                        .liquidGlass()
                 }
                 
                 Spacer()
@@ -78,33 +67,47 @@ struct InterviewAceView: View {
                     .foregroundColor(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(viewModel.isRecording ? Color.red : Color.blue)
-                    .cornerRadius(15)
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(.ultraThinMaterial)
+                            
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(
+                                    LinearGradient(
+                                        colors: [
+                                            (viewModel.isRecording ? Color.red : Color("Blue")).opacity(0.7),
+                                            (viewModel.isRecording ? Color.red : Color("Blue")).opacity(0.5)
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                            
+                            RoundedRectangle(cornerRadius: 16)
+                                .strokeBorder(
+                                    LinearGradient(
+                                        colors: [
+                                            .white.opacity(0.5),
+                                            .white.opacity(0.2),
+                                            .clear
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 1
+                                )
+                        }
+                    )
+                    .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
                 }
                 .padding(.horizontal)
             }
-            .padding()
+            .padding(.top, 100)
+         
             .fullScreenCover(isPresented: $viewModel.isRecording) {
                 RecordingView<InterviewAceViewModel>(viewModel: viewModel)
             }
-        }
-    }
-}
-
-// MARK: - Supporting Views
-struct StatusIndicator: View {
-    let title: String
-    let isActive: Bool
-    let color: Color
-    
-    var body: some View {
-        VStack {
-            Circle()
-                .fill(isActive ? color : Color.gray)
-                .frame(width: 20, height: 20)
-            Text(title)
-                .font(.caption)
-                .foregroundColor(.secondary)
         }
     }
 }

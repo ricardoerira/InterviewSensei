@@ -45,10 +45,10 @@ struct GeminiResponse: Codable {
 }
 
 struct Candidate: Codable {
-    let content: Content
+    let content: GeminiContent
 }
 
-struct Content: Codable {
+struct GeminiContent: Codable {
     let parts: [Part]
 }
 

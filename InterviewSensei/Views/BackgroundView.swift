@@ -18,13 +18,13 @@ struct BackgroundView: View {
             } else if let uiImage = uiImage {
                 backgroundIfImageSelected(image: Image(uiImage: uiImage))
             } else {
-                backgroundIfImageSelected(image: Image("fondo"))
+                backgroundIfImageSelected(image: Image("fondo2"))
             }
             
             VStack(spacing: 0) {
                 // Header image with back button
                 HeaderView(
-                    image: Image("fondo"),
+                    image: Image("fondo2"),
                     onBack: { presentationMode.wrappedValue.dismiss() }
                 )
                 .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .top, endPoint: .bottom))
@@ -52,10 +52,10 @@ struct BackgroundView: View {
     struct BackgroundView_Previews: PreviewProvider {
         static var previews: some View {
             Group {
-                BackgroundView(image: Image("fondo"))
+                BackgroundView(image: Image("fondo2"))
                     .previewDisplayName("With Image")
                 
-                BackgroundView(uiImage: UIImage(named: "fondo"))
+                BackgroundView(uiImage: UIImage(named: "fondo2"))
                     .previewDisplayName("With UIImage")
                 
                 BackgroundView()

@@ -40,6 +40,8 @@
 		419051612DF73EF90068D58F /* RecordingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051602DF73EF80068D58F /* RecordingIndicator.swift */; };
 		419051632DF7437F0068D58F /* WaveAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051622DF7437F0068D58F /* WaveAnimationView.swift */; };
 		419051652DF749230068D58F /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051642DF749220068D58F /* RecordingView.swift */; };
+		F843669C2DFB12E2001E5237 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F843669B2DFB12E2001E5237 /* ViewModifiers.swift */; };
+		F843669F2DFB21B2001E5237 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = F843669E2DFB21B2001E5237 /* WhisperKit */; };
 		F8F8A5122DF8C40700520E7E /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8A5112DF8C40700520E7E /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +102,7 @@
 		419051602DF73EF80068D58F /* RecordingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingIndicator.swift; sourceTree = "<group>"; };
 		419051622DF7437F0068D58F /* WaveAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveAnimationView.swift; sourceTree = "<group>"; };
 		419051642DF749220068D58F /* RecordingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
+		F843669B2DFB12E2001E5237 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		F8F8A5112DF8C40700520E7E /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F843669F2DFB21B2001E5237 /* WhisperKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +220,7 @@
 		4167A0B32DD63FCB0008D0DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F843669B2DFB12E2001E5237 /* ViewModifiers.swift */,
 				F8F8A5112DF8C40700520E7E /* BackgroundView.swift */,
 				419051642DF749220068D58F /* RecordingView.swift */,
 				419051622DF7437F0068D58F /* WaveAnimationView.swift */,
@@ -271,6 +276,7 @@
 			);
 			name = InterviewSensei;
 			packageProductDependencies = (
+				F843669E2DFB21B2001E5237 /* WhisperKit */,
 			);
 			productName = InterviewSensei;
 			productReference = 41274D612DD63A6000064172 /* InterviewSensei.app */;
@@ -344,6 +350,7 @@
 			);
 			mainGroup = 41274D582DD63A6000064172;
 			packageReferences = (
+				F843669D2DFB21B2001E5237 /* XCRemoteSwiftPackageReference "WhisperKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 41274D622DD63A6000064172 /* Products */;
@@ -390,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41795B3A2DF24CCC0012B052 /* QuizModels.swift in Sources */,
+				F843669C2DFB12E2001E5237 /* ViewModifiers.swift in Sources */,
 				41795B2C2DF214B20012B052 /* InterviewAceViewModel.swift in Sources */,
 				41508C3A2DEA456000CF5AD1 /* CVProcessingService.swift in Sources */,
 				41795B282DF2117E0012B052 /* InterviewTypes.swift in Sources */,
@@ -747,6 +755,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F843669D2DFB21B2001E5237 /* XCRemoteSwiftPackageReference "WhisperKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/argmaxinc/WhisperKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F843669E2DFB21B2001E5237 /* WhisperKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F843669D2DFB21B2001E5237 /* XCRemoteSwiftPackageReference "WhisperKit" */;
+			productName = WhisperKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		4167A0BD2DD63FCD0008D0DA /* InterviewSensei.xcdatamodeld */ = {
