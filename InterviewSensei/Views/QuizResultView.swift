@@ -60,6 +60,7 @@ struct QuizResultView: View {
     let category: String?
     let date: Date?
     let questions: [QuizQuestionResult]?
+    let duration: TimeInterval?
 
     @State private var animatedScore: Double = 0
     @State private var showQuestions: Bool = false
@@ -68,6 +69,13 @@ struct QuizResultView: View {
     private var percentage: Double {
         guard totalQuestions > 0 else { return 0 }
         return (Double(score) / Double(totalQuestions)) * 100
+    }
+
+    private var formattedDuration: String {
+        guard let duration = duration else { return "N/A" }
+        let minutes = Int(duration) / 60
+        let seconds = Int(duration) % 60
+        return String(format: "%d:%02d", minutes, seconds)
     }
 
     private var dateFormatter: DateFormatter {
@@ -96,13 +104,19 @@ struct QuizResultView: View {
                             .animation(.easeIn(duration: 0.5).delay(0.2), value: isAppeared)
                     }
                     
-                    if let date = date {
-                        Text(dateFormatter.string(from: date))
+                    HStack(spacing: 16) {
+                        if let date = date {
+                            Label(dateFormatter.string(from: date), systemImage: "calendar")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Label(formattedDuration, systemImage: "clock")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                            .opacity(isAppeared ? 1 : 0)
-                            .animation(.easeIn(duration: 0.5).delay(0.3), value: isAppeared)
                     }
+                    .opacity(isAppeared ? 1 : 0)
+                    .animation(.easeIn(duration: 0.5).delay(0.3), value: isAppeared)
                 }
 
                 // Score Circle
@@ -194,7 +208,7 @@ struct QuizResultView: View {
                         .font(.headline)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.accentColor)
+                        .background(Color("Blue"))
                         .foregroundColor(.white)
                         .cornerRadius(12)
                 }
@@ -279,5 +293,19 @@ struct StatisticView: View {
         .background(Color(.systemBackground))
         .cornerRadius(10)
         .shadow(radius: 2)
+    }
+}
+
+struct QuizResultView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuizResultView(
+            score: 8,
+            totalQuestions: 10,
+            onPracticeAgain: {},
+            category: "Algorithms",
+            date: Date(),
+            questions: nil,
+            duration: 125.5
+        )
     }
 }

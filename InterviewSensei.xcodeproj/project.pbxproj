@@ -3,13 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		41274D652DD63A6000064172 /* InterviewSenseiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41274D642DD63A6000064172 /* InterviewSenseiApp.swift */; };
 		41274D672DD63A6000064172 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41274D662DD63A6000064172 /* ContentView.swift */; };
-		41274D692DD63A6400064172 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41274D682DD63A6400064172 /* Assets.xcassets */; };
 		41274D6C2DD63A6400064172 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41274D6B2DD63A6400064172 /* Preview Assets.xcassets */; };
 		41274D6E2DD63A6400064172 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41274D6D2DD63A6400064172 /* Persistence.swift */; };
 		41274D7B2DD63A6500064172 /* InterviewSenseiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41274D7A2DD63A6500064172 /* InterviewSenseiTests.swift */; };
@@ -18,7 +17,6 @@
 		41508C362DEA44AF00CF5AD1 /* CVImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41508C352DEA44AE00CF5AD1 /* CVImportView.swift */; };
 		41508C382DEA453A00CF5AD1 /* CVImportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41508C372DEA453A00CF5AD1 /* CVImportViewModel.swift */; };
 		41508C3A2DEA456000CF5AD1 /* CVProcessingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41508C392DEA456000CF5AD1 /* CVProcessingService.swift */; };
-		4167A0C62DD63FCF0008D0DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4167A0B02DD63FCA0008D0DA /* Preview Assets.xcassets */; };
 		4167A0C82DD63FCF0008D0DA /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4167A0B42DD63FCB0008D0DA /* MainTabView.swift */; };
 		4167A0C92DD63FCF0008D0DA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4167A0B52DD63FCB0008D0DA /* ProfileView.swift */; };
 		4167A0D02DD63FCF0008D0DA /* InterviewSensei.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4167A0BD2DD63FCD0008D0DA /* InterviewSensei.xcdatamodeld */; };
@@ -42,6 +40,7 @@
 		419051612DF73EF90068D58F /* RecordingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051602DF73EF80068D58F /* RecordingIndicator.swift */; };
 		419051632DF7437F0068D58F /* WaveAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051622DF7437F0068D58F /* WaveAnimationView.swift */; };
 		419051652DF749230068D58F /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419051642DF749220068D58F /* RecordingView.swift */; };
+		F8F8A5122DF8C40700520E7E /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F8A5112DF8C40700520E7E /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +100,7 @@
 		419051602DF73EF80068D58F /* RecordingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingIndicator.swift; sourceTree = "<group>"; };
 		419051622DF7437F0068D58F /* WaveAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveAnimationView.swift; sourceTree = "<group>"; };
 		419051642DF749220068D58F /* RecordingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
+		F8F8A5112DF8C40700520E7E /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +216,7 @@
 		4167A0B32DD63FCB0008D0DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F8F8A5112DF8C40700520E7E /* BackgroundView.swift */,
 				419051642DF749220068D58F /* RecordingView.swift */,
 				419051622DF7437F0068D58F /* WaveAnimationView.swift */,
 				419051602DF73EF80068D58F /* RecordingIndicator.swift */,
@@ -319,7 +320,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					41274D602DD63A6000064172 = {
 						CreatedOnToolsVersion = 14.0.1;
@@ -335,7 +336,6 @@
 				};
 			};
 			buildConfigurationList = 41274D5C2DD63A6000064172 /* Build configuration list for PBXProject "InterviewSensei" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -345,6 +345,7 @@
 			mainGroup = 41274D582DD63A6000064172;
 			packageReferences = (
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 41274D622DD63A6000064172 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -362,10 +363,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				41274D6C2DD63A6400064172 /* Preview Assets.xcassets in Resources */,
-				4167A0C62DD63FCF0008D0DA /* Preview Assets.xcassets in Resources */,
 				41795B2F2DF2381B0012B052 /* GoogleService-Info.plist in Resources */,
 				4167A0D62DD63FD00008D0DA /* Assets.xcassets in Resources */,
-				41274D692DD63A6400064172 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +413,7 @@
 				4167A0D82DD648220008D0DA /* GeminiService.swift in Sources */,
 				41795B2A2DF214180012B052 /* InterviewAceView.swift in Sources */,
 				4190515B2DF733790068D58F /* AudioTranscriptionService.swift in Sources */,
+				F8F8A5122DF8C40700520E7E /* BackgroundView.swift in Sources */,
 				4167A0C82DD63FCF0008D0DA /* MainTabView.swift in Sources */,
 				419051582DF72FDA0068D58F /* InterviewWarmupView.swift in Sources */,
 				419051612DF73EF90068D58F /* RecordingIndicator.swift in Sources */,
@@ -489,6 +489,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -549,6 +550,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -575,7 +577,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"InterviewSensei/Preview Content\"";
-				DEVELOPMENT_TEAM = JP4HQ92HP6;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InterviewSensei/Info.plist;
@@ -586,6 +588,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -607,7 +610,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"InterviewSensei/Preview Content\"";
-				DEVELOPMENT_TEAM = JP4HQ92HP6;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InterviewSensei/Info.plist;
@@ -618,6 +621,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -634,7 +638,6 @@
 		41274D8E2DD63A6500064172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -654,7 +657,6 @@
 		41274D8F2DD63A6500064172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -674,7 +676,6 @@
 		41274D912DD63A6500064172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JP4HQ92HP6;
@@ -692,7 +693,6 @@
 		41274D922DD63A6500064172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JP4HQ92HP6;

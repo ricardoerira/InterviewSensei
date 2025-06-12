@@ -7,90 +7,93 @@ struct ProfileView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                // Profile Section
-                Section {
-                    HStack {
-                        Image(systemName: "person.circle.fill")
-                            .font(.system(size: 60))
-                            .foregroundColor(.blue)
+            ZStack {
+                BackgroundView()
+                List {
+                    // Profile Section
+                    Section {
+                        HStack {
+                            Image(systemName: "person.circle.fill")
+                                .font(.system(size: 60))
+                                .foregroundColor(.blue)
+                            
+                            VStack(alignment: .leading) {
+                                Text(viewModel.userProfile?.name ?? "User")
+                                    .font(.title2)
+                                    .bold()
+                                Text(viewModel.userProfile?.email ?? "user@example.com")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .padding(.vertical, 8)
+                    }
+                    
+                   
+                    
+                    // Preferences Section
+                    Section(header: Text("Preferences")) {
+                        NavigationLink {
+                            PreferenceView(title: "Job Roles", items: JobRole.allCases.map { $0.rawValue })
+                        } label: {
+                            Label("Job Roles", systemImage: "briefcase.fill")
+                        }
                         
-                        VStack(alignment: .leading) {
-                            Text(viewModel.userProfile?.name ?? "User")
-                                .font(.title2)
-                                .bold()
-                            Text(viewModel.userProfile?.email ?? "user@example.com")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                        NavigationLink {
+                            PreferenceView(title: "Experience Levels", items: ExperienceLevel.allCases.map { $0.rawValue })
+                        } label: {
+                            Label("Experience Levels", systemImage: "chart.bar.fill")
                         }
-                    }
-                    .padding(.vertical, 8)
-                }
-                
-               
-                
-                // Preferences Section
-                Section(header: Text("Preferences")) {
-                    NavigationLink {
-                        PreferenceView(title: "Job Roles", items: JobRole.allCases.map { $0.rawValue })
-                    } label: {
-                        Label("Job Roles", systemImage: "briefcase.fill")
-                    }
-                    
-                    NavigationLink {
-                        PreferenceView(title: "Experience Levels", items: ExperienceLevel.allCases.map { $0.rawValue })
-                    } label: {
-                        Label("Experience Levels", systemImage: "chart.bar.fill")
-                    }
-                    
-                    NavigationLink {
-                        PreferenceView(title: "Question Categories", items: QuestionCategory.allCases.map { $0.rawValue })
-                    } label: {
-                        Label("Question Categories", systemImage: "list.bullet")
-                    }
-                }
-                
-                // Voice Settings Section
-                Section(header: Text("Voice Settings")) {
-                    Picker("Voice", selection: $viewModel.selectedVoice) {
-                        ForEach(VoiceOption.allCases, id: \.self) { voice in
-                            Text(voice.rawValue).tag(voice)
+                        
+                        NavigationLink {
+                            PreferenceView(title: "Question Categories", items: QuestionCategory.allCases.map { $0.rawValue })
+                        } label: {
+                            Label("Question Categories", systemImage: "list.bullet")
                         }
                     }
                     
-                    Toggle("Enable Voice Feedback", isOn: $viewModel.enableVoiceFeedback)
-                }
-                
-                // Data Management Section
-                Section(header: Text("Data Management")) {
-                    Button(action: { viewModel.exportData() }) {
-                        Label("Export Data", systemImage: "square.and.arrow.up")
+                    // Voice Settings Section
+                    Section(header: Text("Voice Settings")) {
+                        Picker("Voice", selection: $viewModel.selectedVoice) {
+                            ForEach(VoiceOption.allCases, id: \.self) { voice in
+                                Text(voice.rawValue).tag(voice)
+                            }
+                        }
+                        
+                        Toggle("Enable Voice Feedback", isOn: $viewModel.enableVoiceFeedback)
                     }
                     
-                    Button(action: { showingDeleteConfirmation = true }) {
-                        Label("Delete Account", systemImage: "trash")
-                            .foregroundColor(.red)
+                    // Data Management Section
+                    Section(header: Text("Data Management")) {
+                        Button(action: { viewModel.exportData() }) {
+                            Label("Export Data", systemImage: "square.and.arrow.up")
+                        }
+                        
+                        Button(action: { showingDeleteConfirmation = true }) {
+                            Label("Delete Account", systemImage: "trash")
+                                .foregroundColor(.red)
+                        }
                     }
                 }
-            }
-            .navigationTitle("Profile")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Edit") {
-                        showingEditProfile = true
+                .navigationTitle("Profile")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Edit") {
+                            showingEditProfile = true
+                        }
                     }
                 }
-            }
-            .sheet(isPresented: $showingEditProfile) {
-                EditProfileView(profile: viewModel.userProfile)
-            }
-            .alert("Delete Account", isPresented: $showingDeleteConfirmation) {
-                Button("Cancel", role: .cancel) { }
-                Button("Delete", role: .destructive) {
-                    viewModel.deleteAccount()
+                .sheet(isPresented: $showingEditProfile) {
+                    EditProfileView(profile: viewModel.userProfile)
                 }
-            } message: {
-                Text("Are you sure you want to delete your account? This action cannot be undone.")
+                .alert("Delete Account", isPresented: $showingDeleteConfirmation) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("Delete", role: .destructive) {
+                        viewModel.deleteAccount()
+                    }
+                } message: {
+                    Text("Are you sure you want to delete your account? This action cannot be undone.")
+                }
             }
         }
     }
@@ -184,4 +187,4 @@ struct ProfileView_Previews: PreviewProvider {
         ProfileView()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
-} 
+}

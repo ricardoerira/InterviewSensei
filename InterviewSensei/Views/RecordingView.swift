@@ -6,20 +6,7 @@ struct RecordingView<T: RecordingProtocol>: View where T: ObservableObject {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(hex: "1A1E29"),
-                    Color(hex: "1A1E29"),
-
-                    Color(hex: "3B4B74"),
-                    
-                    Color(hex: "638AD6")
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .edgesIgnoringSafeArea(.all) // Ensures the gradient fills the entire screen
-            
+            BackgroundView()
             
             VStack {
                 Spacer()
@@ -62,8 +49,8 @@ struct RecordingView_Previews: PreviewProvider {
     static var previews: some View {
         RecordingView(viewModel: InterviewAceViewModel()) // Keep InterviewAceViewModel for preview
     }
-} 
-struct GradientBackgroundView: View {
+}
+struct l: View {
     var body: some View {
         LinearGradient(
             gradient: Gradient(colors: [

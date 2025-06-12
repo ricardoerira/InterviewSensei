@@ -1,6 +1,90 @@
 import SwiftUI
 import CoreData
 
+// MARK: - Overall Statistics Section
+private struct OverallStatisticsSection: View {
+    let quizResults: [QuizResult]
+    let averageScore: Double
+    
+    var body: some View {
+        Section("Overall Statistics") {
+            StatisticRow(
+                title: "Total Quizzes",
+                value: "\(quizResults.count)",
+                icon: "list.bullet.clipboard",
+                color: .blue
+            )
+            
+            StatisticRow(
+                title: "Average Score",
+                value: String(format: "%.1f%%", averageScore),
+                icon: "chart.bar.fill",
+                color: .green
+            )
+        }
+    }
+}
+
+// MARK: - Category Statistics Section
+private struct CategoryStatisticsSection: View {
+    let categoryStats: [(category: String, count: Int, averageScore: Double)]
+    
+    var body: some View {
+        Section("Category Statistics") {
+            ForEach(categoryStats, id: \.category) { stat in
+                CategoryStatRow(stat: stat)
+            }
+        }
+    }
+}
+
+private struct CategoryStatRow: View {
+    let stat: (category: String, count: Int, averageScore: Double)
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(stat.category)
+                .font(.headline)
+            
+            HStack {
+                Text("Quizzes: \(stat.count)")
+                    .font(.subheadline)
+                Spacer()
+                Text(String(format: "Avg: %.1f%%", stat.averageScore))
+                    .font(.subheadline)
+                    .foregroundColor(stat.averageScore >= 70 ? .green : .red)
+            }
+        }
+        .padding(.vertical, 4)
+        .contentShape(Rectangle())
+    }
+}
+
+// MARK: - Quiz History Section
+private struct QuizHistorySection: View {
+    let quizResults: [QuizResult]
+    let onResultSelected: (QuizResult) -> Void
+    
+    var body: some View {
+        Section("Quiz History") {
+            if quizResults.isEmpty {
+                Text("No quiz history available")
+                    .foregroundColor(.secondary)
+                    .italic()
+            } else {
+                ForEach(quizResults) { result in
+                    QuizResultRow(result: result)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            onResultSelected(result)
+                        }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Main View
 struct QuizStatisticsView: View {
     @StateObject private var viewModel = QuizStatisticsViewModel()
     @Environment(\.managedObjectContext) private var viewContext
@@ -9,69 +93,23 @@ struct QuizStatisticsView: View {
     
     var body: some View {
         NavigationView {
-            
             List {
-                // Overall Statistics Section
-                Section("Overall Statistics") {
-                    StatisticRow(
-                        title: "Total Quizzes",
-                        value: "\(viewModel.quizResults.count)",
-                        icon: "list.bullet.clipboard",
-                        color: .blue
-                    )
-            
-                    
-                    StatisticRow(
-                        title: "Average Score",
-                        value: String(format: "%.1f%%", viewModel.calculateAverageScore()),
-                        icon: "chart.bar.fill",
-                        color: .green
-                    )
-                }
+                OverallStatisticsSection(
+                    quizResults: viewModel.quizResults,
+                    averageScore: viewModel.calculateAverageScore()
+                )
                 
-                // Category Statistics Section
-                Section("Category Statistics") {
-                    ForEach(viewModel.calculateCategoryStats(), id: \.category) { stat in
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(stat.category)
-                                .font(.headline)
-                            
-                            HStack {
-                                Text("Quizzes: \(stat.count)")
-                                    .font(.subheadline)
-                                Spacer()
-                                Text(String(format: "Avg: %.1f%%", stat.averageScore))
-                                    .font(.subheadline)
-                                    .foregroundColor(stat.averageScore >= 70 ? .green : .red)
-                            }
-                        }
-                        .padding(.vertical, 4)
-                        .contentShape(Rectangle())
-                    }
-                }
+                CategoryStatisticsSection(
+                    categoryStats: viewModel.calculateCategoryStats()
+                )
                 
-                // Quiz History Section
-                Section("Quiz History") {
-                    if viewModel.quizResults.isEmpty {
-                        Text("No quiz history available")
-                            .foregroundColor(.secondary)
-                            .italic()
-                    } else {
-                        ForEach(viewModel.quizResults) { result in
-                            QuizResultRow(result: result)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    Task { @MainActor in
-                                           selectedResult = result
-                                           showingDetail = true
-                                       }
-                                    
-                                }
-                                    
-                                
-                        }
+                QuizHistorySection(
+                    quizResults: viewModel.quizResults,
+                    onResultSelected: { result in
+                        selectedResult = result
+                        showingDetail = true
                     }
-                }
+                )
             }
             .navigationTitle("Quiz Statistics")
             .toolbar {
@@ -111,12 +149,20 @@ struct QuizStatisticsView: View {
                         },
                         category: result.category,
                         date: result.date,
-                        questions: (result.questions?.allObjects as? [QuizQuestionResult]) ?? []
+                        questions: (result.questions?.allObjects as? [QuizQuestionResult]) ?? [],
+                        duration: result.duration
                     )
                     .transition(.opacity)
                 }
             }
         }
+    }
+}
+
+// MARK: - Preview Provider
+struct QuizStatisticsView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuizStatisticsView()
     }
 }
 
@@ -202,4 +248,3 @@ struct QuizResultRow: View {
         .padding(.vertical, 8)
     }
 }
-

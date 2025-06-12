@@ -14,10 +14,13 @@ class PracticeViewModel: ObservableObject {
     @Published var showError: Bool = false
     @Published var errorMessage: String?
     @Published var score: Int = 0
+    @Published var elapsedTime: TimeInterval = 0
     
     private let geminiService: GeminiService
     private var cvInfo: CVInfo?
     private var selectedAnswers: [Int?] = []
+    private var quizStartTime: Date?
+    private var timer: Timer?
     
     // MARK: - Initialization
     init(geminiService: GeminiService = GeminiService()) {
@@ -64,6 +67,7 @@ class PracticeViewModel: ObservableObject {
                 self.score = 0
                 self.selectedAnswers = Array(repeating: nil, count: questions.count)
                 self.quizState = .practicing
+                self.startTimer()
             }
         } catch {
             print("[PracticeViewModel] Error generating questions: \(error.localizedDescription)")
@@ -91,10 +95,8 @@ class PracticeViewModel: ObservableObject {
         if selectedIndex == currentQuestion.correctOptionIndex {
             print("[PracticeViewModel] Correct answer")
             score += 1
-            feedbackMessage = "Correct! Well done!"
         } else {
             print("[PracticeViewModel] Incorrect answer")
-            feedbackMessage = "Incorrect. The correct answer was: \(currentQuestion.options[currentQuestion.correctOptionIndex])"
         }
     }
     
@@ -115,6 +117,7 @@ class PracticeViewModel: ObservableObject {
     
     func resetQuiz() {
         print("[PracticeViewModel] Resetting quiz")
+        stopTimer()
         quizState = .selectingCategory
         quizQuestions = []
         currentQuestionIndex = 0
@@ -123,11 +126,28 @@ class PracticeViewModel: ObservableObject {
         feedbackMessage = nil
         score = 0
         selectedAnswers = []
+        elapsedTime = 0
+        quizStartTime = nil
     }
     
     // MARK: - Private Methods
+    private func startTimer() {
+        quizStartTime = Date()
+        elapsedTime = 0
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            guard let self = self, let startTime = self.quizStartTime else { return }
+            self.elapsedTime = Date().timeIntervalSince(startTime)
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
     private func saveQuizResult() {
         print("[PracticeViewModel] Saving quiz result")
+        stopTimer()
         let context = PersistenceController.shared.container.viewContext
         
         // Create QuizResult
@@ -137,6 +157,7 @@ class PracticeViewModel: ObservableObject {
         quizResult.category = quizQuestions.first?.category ?? "Unknown"
         quizResult.score = Int16(score)
         quizResult.totalQuestions = Int16(quizQuestions.count)
+        quizResult.duration = elapsedTime
 
         // Create QuizQuestionResults
         for (index, question) in quizQuestions.enumerated() {
@@ -163,10 +184,10 @@ class PracticeViewModel: ObservableObject {
         print("[PracticeViewModel] Generating questions for category: \(category.rawValue)")
         
         let prompt = """
-        Generate 5 multiple-choice interview questions for a \(category.rawValue) interview.
+        Generate 5 multiple-choice interview questions for a \(category.rawValue) interview for senior.
         The candidate has the following details:
         Skills: \(cvInfo?.skills )
-        Summary: \(cvInfo?.summary )
+        Summary: \(cvInfo?.summary  )
 
         Return ONLY the raw JSON in the following format, without any markdown formatting or code block indicators:
         {
@@ -181,7 +202,7 @@ class PracticeViewModel: ObservableObject {
         
         Make sure the questions are relevant to the candidate's background and experience.
         Do not include any markdown formatting, code block indicators, or additional text.
-        Short questions and answers be specific.
+        Short questions and answers be specific max 50 words by option.
         """
         
         print("[PracticeViewModel] Sending prompt to Gemini")

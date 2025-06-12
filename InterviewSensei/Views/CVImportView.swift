@@ -14,57 +14,60 @@ struct CVImportView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                if let cv = viewModel.importedCV {
-                    ImportedCVContentView(cv: cv, viewModel: viewModel)
-                } else {
-                    VStack(spacing: 20) {
-                        Image(systemName: "doc.text.magnifyingglass")
-                            .font(.system(size: 60))
-                            .foregroundColor(.blue)
-                        
-                        Text("Import your CV")
-                            .font(.title2)
-                            .bold()
-                        
-                        Text("Upload your CV in PDF or text format to get started")
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                        
-                        Button(action: {
-                            isFilePickerPresented = true
-                        }) {
-                            Label("Choose File", systemImage: "doc.badge.plus")
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
+            ZStack {
+                BackgroundView()
+                VStack {
+                    if let cv = viewModel.importedCV {
+                        ImportedCVContentView(cv: cv, viewModel: viewModel)
+                    } else {
+                        VStack(spacing: 20) {
+                            Image(systemName: "doc.text.magnifyingglass")
+                                .font(.system(size: 60))
+                                .foregroundColor(.blue)
+                            
+                            Text("Import your CV")
+                                .font(.title2)
+                                .bold()
+                            
+                            Text("Upload your CV in PDF or text format to get started")
+                                .foregroundColor(.secondary)
+                                .multilineTextAlignment(.center)
+                            
+                            Button(action: {
+                                isFilePickerPresented = true
+                            }) {
+                                Label("Choose File", systemImage: "doc.badge.plus")
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                            }
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
+                        .padding()
                     }
-                    .padding()
                 }
-            }
-            .navigationTitle("CV Import")
-            .fileImporter(
-                isPresented: $isFilePickerPresented,
-                allowedContentTypes: [.pdf, .plainText],
-                allowsMultipleSelection: false
-            ) { result in
-                Task {
-                    await handleFileImport(result)
+                .navigationTitle("CV Import")
+                .fileImporter(
+                    isPresented: $isFilePickerPresented,
+                    allowedContentTypes: [.pdf, .plainText],
+                    allowsMultipleSelection: false
+                ) { result in
+                    Task {
+                        await handleFileImport(result)
+                    }
                 }
-            }
-            .alert("Error", isPresented: $viewModel.showError) {
-                Button("OK", role: .cancel) { }
-            } message: {
-                Text(viewModel.errorMessage ?? "An unknown error occurred")
-            }
-            .alert("Success", isPresented: $viewModel.showSuccess) {
-                Button("OK", role: .cancel) { }
-            } message: {
-                Text("CV has been successfully deleted")
+                .alert("Error", isPresented: $viewModel.showError) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text(viewModel.errorMessage ?? "An unknown error occurred")
+                }
+                .alert("Success", isPresented: $viewModel.showSuccess) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text("CV has been successfully deleted")
+                }
             }
         }
         // Show loading indicator if isLoading is true
@@ -477,4 +480,4 @@ struct FlowLayout: Layout {
         
         return (offsets, CGSize(width: containerWidth, height: maxY))
     }
-} 
+}
