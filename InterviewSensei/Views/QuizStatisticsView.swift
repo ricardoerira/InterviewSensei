@@ -45,18 +45,20 @@ private struct CategoryStatRow: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(stat.category)
                 .font(.headline)
+                .foregroundColor(.white)
             
             HStack {
                 Text("Quizzes: \(stat.count)")
                     .font(.subheadline)
+                    .foregroundColor(.white.opacity(0.7))
                 Spacer()
                 Text(String(format: "Avg: %.1f%%", stat.averageScore))
                     .font(.subheadline)
                     .foregroundColor(stat.averageScore >= 70 ? .green : .red)
             }
         }
-        .padding(.vertical, 4)
-        .contentShape(Rectangle())
+        .padding(.vertical, 8)
+        .padding(.horizontal, 16)
     }
 }
 
@@ -89,38 +91,97 @@ struct QuizStatisticsView: View {
     @StateObject private var viewModel = QuizStatisticsViewModel()
     @Environment(\.managedObjectContext) private var viewContext
     @State private var selectedResult: QuizResult?
-    @State private var showingDetail = false
+    @StateObject var sheetManager = SheetMananger()
+
+    class SheetMananger: ObservableObject {
+        @Published var showingDetail = false
+    }
     
     var body: some View {
         NavigationView {
-            List {
-                OverallStatisticsSection(
-                    quizResults: viewModel.quizResults,
-                    averageScore: viewModel.calculateAverageScore()
-                )
+            ZStack {
+                BackgroundView()
                 
-                CategoryStatisticsSection(
-                    categoryStats: viewModel.calculateCategoryStats()
-                )
-                
-                QuizHistorySection(
-                    quizResults: viewModel.quizResults,
-                    onResultSelected: { result in
-                        selectedResult = result
-                        showingDetail = true
+                ScrollView {
+                    VStack(spacing: 20) {
+                        // Overall Statistics
+                        VStack(spacing: 16) {
+                            Text("Overall Statistics")
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.white)
+                            
+                            StatisticRow(
+                                title: "Total Quizzes",
+                                value: "\(viewModel.quizResults.count)",
+                                icon: "list.bullet.clipboard",
+                                color: .blue
+                            )
+                            .liquidGlass()
+                            
+                            StatisticRow(
+                                title: "Average Score",
+                                value: String(format: "%.1f%%", viewModel.calculateAverageScore()),
+                                icon: "chart.bar.fill",
+                                color: .green
+                            )
+                            .liquidGlass()
+                        }
+                        .padding()
+                        
+                        // Category Statistics
+                        VStack(spacing: 16) {
+                            Text("Category Statistics")
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.white)
+                            
+                            ForEach(viewModel.calculateCategoryStats(), id: \.category) { stat in
+                                CategoryStatRow(stat: stat)
+                                    .liquidGlass()
+                            }
+                        }
+                        .padding()
+                        
+                        // Quiz History
+                        VStack(spacing: 16) {
+                            Text("Quiz History")
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.white)
+                            
+                            if viewModel.quizResults.isEmpty {
+                                Text("No quiz history available")
+                                    .foregroundColor(.white)
+                                    .italic()
+                                    .liquidGlass()
+                            } else {
+                                ForEach(viewModel.quizResults) { result in
+                                    QuizResultRow(result: result)
+                                        .liquidGlass()
+                                        .onTapGesture {
+                                            selectedResult = result
+                                            sheetManager.showingDetail = true
+                                        }
+                                }
+                            }
+                        }
+                        .padding()
                     }
-                )
-            }
-            .navigationTitle("Quiz Statistics")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        viewModel.showDeleteConfirmation = true
-                    } label: {
-                        Label("Clear History", systemImage: "trash")
-                    }
+                    .padding(.top, 90)
                 }
             }
+//            .navigationBarTitleDisplayMode(.inline)
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Text("Quiz Statistics")
+//                        .font(.title)
+//                        .bold()
+//                        .foregroundColor(.white.opacity(0.8))
+//                        .padding(.leading, 80)
+//                }
+//               
+//            }
             .alert("Error", isPresented: $viewModel.showError) {
                 Button("OK", role: .cancel) { }
             } message: {
@@ -137,22 +198,19 @@ struct QuizStatisticsView: View {
             .refreshable {
                 viewModel.loadQuizResults()
             }
-            .sheet(isPresented: $showingDetail, onDismiss: {
-                selectedResult = nil
-            }) {
+            .sheet(isPresented: $sheetManager.showingDetail) {
                 if let result = selectedResult {
                     QuizResultView(
                         score: Int(result.score),
                         totalQuestions: Int(result.totalQuestions),
                         onPracticeAgain: {
-                            showingDetail = false
+                            sheetManager.showingDetail = false
                         },
                         category: result.category,
                         date: result.date,
                         questions: (result.questions?.allObjects as? [QuizQuestionResult]) ?? [],
                         duration: result.duration
                     )
-                    .transition(.opacity)
                 }
             }
         }
@@ -182,15 +240,17 @@ struct StatisticRow: View {
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.white.opacity(0.7))
                 Text(value)
                     .font(.title2)
                     .bold()
+                    .foregroundColor(.white)
             }
             
             Spacer()
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 8)
+        .padding(.horizontal, 16)
     }
 }
 
@@ -214,15 +274,17 @@ struct QuizResultRow: View {
             HStack {
                 Text(result.category ?? "Unknown Category")
                     .font(.headline)
+                    .foregroundColor(.white)
                 Spacer()
                 Text(dateFormatter.string(from: result.date ?? Date()))
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.white.opacity(0.7))
             }
             
             HStack {
                 Text("Score: \(result.score)/\(result.totalQuestions)")
                     .font(.subheadline)
+                    .foregroundColor(.white.opacity(0.7))
                 Spacer()
                 Text(String(format: "%.1f%%", percentage))
                     .font(.subheadline)
@@ -235,7 +297,7 @@ struct QuizResultRow: View {
                     Rectangle()
                         .frame(width: geometry.size.width, height: 8)
                         .opacity(0.3)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.white.opacity(0.3))
                     
                     Rectangle()
                         .frame(width: min(CGFloat(percentage) / 100.0 * geometry.size.width, geometry.size.width), height: 8)
@@ -246,5 +308,6 @@ struct QuizResultRow: View {
             .frame(height: 8)
         }
         .padding(.vertical, 8)
+        .padding(.horizontal, 16)
     }
 }

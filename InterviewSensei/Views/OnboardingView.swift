@@ -67,10 +67,10 @@ struct OnboardingView: View {
             isVideoStep: false
         ),
         OnboardingStep(
-            image: "lightbulb.fill",
-            title: "Smart Feedback",
-            description: "Get instant, personalized feedback on your responses",
-            isVideoStep: false
+            image: "mic.fill",
+            title: "Real Interview Support",
+            description: "Get real-time assistance during your actual interviews. Our AI listens to questions, transcribes them instantly",
+            isVideoStep: true
         )
     ]
     
@@ -79,7 +79,7 @@ struct OnboardingView: View {
             // Video Background
             if let player = playerViewModel.player {
                 VideoPlayer(player: player)
-                    .scaleEffect(4)
+                    .scaleEffect(3.9)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .clipped()
                     .ignoresSafeArea()
@@ -213,7 +213,7 @@ struct VideoPlayerView: View {
         ZStack {
             if let player = playerViewModel.player {
                 VideoPlayer(player: player)
-                    .scaleEffect(4)
+                    .scaleEffect(3)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .clipped()
                     .ignoresSafeArea()

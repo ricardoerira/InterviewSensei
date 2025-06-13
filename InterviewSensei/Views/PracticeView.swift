@@ -184,8 +184,11 @@ struct PracticeView: View {
                 
                 // Question text
                 Text(currentQuestion.questionText)
-                    .font(.title3).bold()
+                    .font(.title3)
+                    .bold()
                     .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity)
                     .padding()
                     .transition(.asymmetric(
                         insertion: .scale(scale: 0.8).combined(with: .opacity),
@@ -280,7 +283,7 @@ struct PracticeView: View {
                             }
                         )
                         .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
-                }
+                }.padding(.bottom, 50)
                 .padding()
             }
         }

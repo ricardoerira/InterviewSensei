@@ -29,6 +29,14 @@ struct MainTabView: View {
                     Label("Statistics", systemImage: "chart.bar")
                 }
         }
+        .background(Color("Light"))
+        .onAppear {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor(Color("Light"))
+            UITabBar.appearance().standardAppearance = appearance
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }
 

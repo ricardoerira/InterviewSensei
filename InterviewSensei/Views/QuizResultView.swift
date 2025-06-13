@@ -86,140 +86,166 @@ struct QuizResultView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 32) {
-                // Header
-                VStack(spacing: 8) {
-                    Text("Quiz Result")
-                        .font(.largeTitle)
-                        .bold()
-                        .opacity(isAppeared ? 1 : 0)
-                        .animation(.easeIn(duration: 0.5), value: isAppeared)
-                    
-                    if let category = category {
-                        Text(category)
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                            .opacity(isAppeared ? 1 : 0)
-                            .animation(.easeIn(duration: 0.5).delay(0.2), value: isAppeared)
-                    }
-                    
-                    HStack(spacing: 16) {
-                        if let date = date {
-                            Label(dateFormatter.string(from: date), systemImage: "calendar")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
-                        
-                        Label(formattedDuration, systemImage: "clock")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                    .opacity(isAppeared ? 1 : 0)
-                    .animation(.easeIn(duration: 0.5).delay(0.3), value: isAppeared)
-                }
-
-                // Score Circle
-                ZStack {
-                    Circle()
-                        .stroke(lineWidth: 20)
-                        .opacity(0.2)
-                        .foregroundColor(.blue)
-
-                    Circle()
-                        .trim(from: 0.0, to: CGFloat(animatedScore / 100))
-                        .stroke(
-                            AngularGradient(
-                                gradient: Gradient(colors: [.green, .yellow, .red]),
-                                center: .center
-                            ),
-                            style: StrokeStyle(lineWidth: 20, lineCap: .round)
-                        )
-                        .rotationEffect(.degrees(-90))
-                        .animation(.easeOut(duration: 1.0), value: animatedScore)
-
-                    VStack {
-                        Text(String(format: "%.1f%%", animatedScore))
+        ZStack {
+            LinearGradient(
+                              gradient: Gradient(colors: [
+                                  Color(hex: "#a8acae"),
+                                  Color(hex: "#a3a7a8"),
+                                  Color(hex: "#0A1928"),
+                                  Color(hex: "#0A1928")
+                                  
+                              ]),
+                              startPoint: .top,
+                              endPoint: .bottom
+                          )
+            .ignoresSafeArea()
+            
+            ScrollView {
+                VStack(spacing: 32) {
+                    // Header
+                    VStack(spacing: 8) {
+                        Text("Quiz Result")
                             .font(.largeTitle)
                             .bold()
-                        Text("\(score) / \(totalQuestions)")
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .frame(width: 200, height: 200)
-                .opacity(isAppeared ? 1 : 0)
-                .animation(.easeIn(duration: 0.5).delay(0.4), value: isAppeared)
-
-                // Score Breakdown
-                VStack(spacing: 16) {
-                    HStack(spacing: 20) {
-                        StatisticView(
-                            title: "Correct",
-                            value: "\(score)",
-                            icon: "checkmark.circle.fill",
-                            color: .green
-                        )
+                            .foregroundColor(.white)
+                            .opacity(isAppeared ? 1 : 0)
+                            .animation(.easeIn(duration: 0.5), value: isAppeared)
                         
-                        StatisticView(
-                            title: "Incorrect",
-                            value: "\(totalQuestions - score)",
-                            icon: "xmark.circle.fill",
-                            color: .red
-                        )
-                    }
-                }
-                .padding(.horizontal)
-
-                // Questions List
-                if let questions = questions {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Button {
-                            withAnimation {
-                                showQuestions.toggle()
-                            }
-                        } label: {
-                            HStack {
-                                Text("Question Details")
-                                    .font(.headline)
-                                Spacer()
-                                Image(systemName: showQuestions ? "chevron.up" : "chevron.down")
-                            }
-                            .padding()
-                            .background(Color(.systemGray6))
-                            .cornerRadius(10)
+                        if let category = category {
+                            Text(category)
+                                .font(.title3)
+                                .foregroundColor(.white.opacity(0.7))
+                                .opacity(isAppeared ? 1 : 0)
+                                .animation(.easeIn(duration: 0.5).delay(0.2), value: isAppeared)
                         }
                         
-                        if showQuestions {
-                            ForEach(Array(questions.enumerated()), id: \.element.id) { index, question in
-                                QuestionResultRow(
-                                    questionNumber: index + 1,
-                                    question: question
-                                )
+                        HStack(spacing: 16) {
+                            if let date = date {
+                                Label(dateFormatter.string(from: date), systemImage: "calendar")
+                                    .font(.subheadline)
+                                    .foregroundColor(.white.opacity(0.7))
                             }
+                            
+                            Label(formattedDuration, systemImage: "clock")
+                                .font(.subheadline)
+                                .foregroundColor(.white.opacity(0.7))
+                        }
+                        .opacity(isAppeared ? 1 : 0)
+                        .animation(.easeIn(duration: 0.5).delay(0.3), value: isAppeared)
+                    }
+                   
+                    .padding(.horizontal)
+
+                    // Score Circle
+                    ZStack {
+                        Circle()
+                            .stroke(lineWidth: 20)
+                            .opacity(0.2)
+                            .foregroundColor(Color("Blue"))
+
+                        Circle()
+                            .trim(from: 0.010, to: CGFloat(animatedScore / 100))
+                            .stroke(
+                                LinearGradient(
+                                    colors: [.red, .yellow, .green],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                ),
+                                style: StrokeStyle(lineWidth: 20, lineCap: .round)
+                            )
+                            .rotationEffect(.degrees(-90))
+                            .animation(.easeOut(duration: 2.0), value: animatedScore)
+
+                        VStack {
+                            Text(String(format: "%.1f%%", animatedScore))
+                                .font(.largeTitle)
+                                .bold()
+                                .foregroundColor(.white)
+                            Text("\(score) / \(totalQuestions)")
+                                .font(.title3)
+                                .foregroundColor(.white.opacity(0.7))
+                        }
+                    }
+                    .frame(width: 200, height: 200)
+                    .opacity(isAppeared ? 1 : 0)
+                    .animation(.easeIn(duration: 0.0).delay(0.0), value: isAppeared)
+                   
+
+                    // Score Breakdown
+                    VStack(spacing: 16) {
+                        HStack(spacing: 20) {
+                            StatisticView(
+                                title: "Correct",
+                                value: "\(score)",
+                                icon: "checkmark.circle.fill",
+                                color: .green
+                            )
+                            
+                            StatisticView(
+                                title: "Incorrect",
+                                value: "\(totalQuestions - score)",
+                                icon: "xmark.circle.fill",
+                                color: .red
+                            )
                         }
                     }
                     .padding(.horizontal)
-                }
 
-                // Practice Again Button
-                Button(action: onPracticeAgain) {
-                    Text("Practice Again")
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color("Blue"))
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
+                    // Questions List
+                    if let questions = questions {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Button {
+                                withAnimation {
+                                    showQuestions.toggle()
+                                }
+                            } label: {
+                                HStack {
+                                    Text("Question Details")
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                    Image(systemName: showQuestions ? "chevron.up" : "chevron.down")
+                                        .foregroundColor(.white)
+                                }
+                                .padding()
+                                .liquidGlass()
+                            }
+                            
+                            if showQuestions {
+                                ForEach(Array(questions.enumerated()), id: \.element.id) { index, question in
+                                    QuestionResultRow(
+                                        questionNumber: index + 1,
+                                        question: question
+                                    )
+                                    .liquidGlass()
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+
+                    // Practice Again Button
+                    Button(action: onPracticeAgain) {
+                        Text("Practice Again")
+                            .font(.headline)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .overlay(
+                                Text("Practice Again")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            )
+                    }
+                    .buttonStyle(GlassButtonStyle())
+                    .padding(.horizontal)
+                    .padding(.top, 24)
                 }
-                .padding(.horizontal)
-                .padding(.top, 24)
+                .padding()
             }
-            .padding()
         }
         .onAppear {
             isAppeared = true
-            withAnimation(.easeOut(duration: 1.0)) {
+            withAnimation(.easeOut(duration: 2.0)) {
                 animatedScore = percentage
             }
         }
@@ -238,10 +264,11 @@ struct QuestionResultRow: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Question \(questionNumber)")
                 .font(.headline)
+                .foregroundColor(.white)
             
             Text(question.questionText ?? "")
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundColor(.white.opacity(0.7))
             
             HStack {
                 Image(systemName: question.selectedOptionIndex == question.correctOptionIndex ? "checkmark.circle.fill" : "xmark.circle.fill")
@@ -249,10 +276,11 @@ struct QuestionResultRow: View {
                 
                 Text("Your answer: \(question.options![Int(question.selectedOptionIndex ?? 0)])")
                     .font(.subheadline)
+                    .foregroundColor(.white.opacity(0.7))
                 
                 if question.selectedOptionIndex != question.correctOptionIndex {
                     Text("•")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.white.opacity(0.7))
                     Text("Correct: \(question.options![Int(question.correctOptionIndex)])")
                         .font(.subheadline)
                         .foregroundColor(.green)
@@ -260,8 +288,6 @@ struct QuestionResultRow: View {
             }
         }
         .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(10)
     }
 }
 
@@ -281,18 +307,17 @@ struct StatisticView: View {
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.white.opacity(0.7))
                 Text(value)
                     .font(.title2)
                     .bold()
+                    .foregroundColor(.white)
             }
             
             Spacer()
         }
         .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(10)
-        .shadow(radius: 2)
+        .liquidGlass()
     }
 }
 

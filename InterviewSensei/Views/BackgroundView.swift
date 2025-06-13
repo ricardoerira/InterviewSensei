@@ -25,9 +25,9 @@ struct BackgroundView: View {
                 // Header image with back button
                 HeaderView(
                     image: Image("fondo2"),
-                    onBack: { presentationMode.wrappedValue.dismiss() }
+                    onBack: nil
                 )
-                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .top, endPoint: .bottom))
+               
                 .ignoresSafeArea()
             }
         }
@@ -52,14 +52,10 @@ struct BackgroundView: View {
     struct BackgroundView_Previews: PreviewProvider {
         static var previews: some View {
             Group {
-                BackgroundView(image: Image("fondo2"))
-                    .previewDisplayName("With Image")
-                
-                BackgroundView(uiImage: UIImage(named: "fondo2"))
-                    .previewDisplayName("With UIImage")
-                
+                // Default background
                 BackgroundView()
                     .previewDisplayName("Default Background")
+                    .previewLayout(.sizeThatFits)
             }
         }
     }
@@ -80,11 +76,10 @@ struct BackgroundView: View {
     
     struct HeaderView: View {
         let image: Image?
-        let onBack: (() -> Void)?        // ← injected action
-        
+        let onBack: (() -> Void)?
         
         var body: some View {
-            ZStack(alignment: .top) {
+            ZStack(alignment: .topLeading) {
                 if let image = image {
                     image
                         .resizable()
@@ -92,30 +87,70 @@ struct BackgroundView: View {
                         .frame(height: 250)
                         .clipped()
                         .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .top, endPoint: .bottom))
+                       
                 } else {
                     Color.gray
                         .frame(height: 250)
                 }
+                
+                // Logo and Header at top leading
+//                HStack(spacing: 10) {
+//                    Spacer()
+//                    VStack(spacing: 10) {
+//                        
+//                        Image("logo")
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(width: 70, height: 70)
+//                        
+//                        
+//                        Image("InterviewHeader")
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(height: 70)
+//                    }
+//                  
+//                }
+//                .padding(.top, 50)
+//                .padding(.horizontal)
+                
+                // Back button if needed
                 if let onBack = onBack {
-                    
-                    HStack {
-                        Button(action: onBack) {    // ← use injected action
-                            Image(systemName: "chevron.left").bold()
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.white.opacity(0.7))
-                                .clipShape(Circle())
-                                .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 2)
-                            
+                    VStack {
+                        HStack {
+                            Button(action: onBack) {
+                                Image(systemName: "chevron.left").bold()
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.white.opacity(0.7))
+                                    .clipShape(Circle())
+                                    .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 2)
+                            }
+                            Spacer()
                         }
-                    }
+                        .padding(.horizontal)
+                        Spacer()
+                    }.padding(.top, 50)
+                } else {
+                    
                 }
-                Spacer()
-                
-                
-                    .padding(.top, 50)
-                    .padding(.horizontal)
             }
+        }
+    }
+}
+
+// MARK: - Header Preview
+struct HeaderView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            
+            
+            // Header without image
+            BackgroundView.HeaderView(image: nil, onBack: nil)
+                .previewDisplayName("Header without Image")
+                .previewLayout(.sizeThatFits)
+            
+            
         }
     }
 }
